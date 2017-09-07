@@ -3,11 +3,8 @@
 body {
   margin: 0;
   font-size: 16px;
-  background-image: url("../images/dices.jpeg");
-}
-
-background-image {
-  opacity: 0.1;
+/*  background-image: url("../images/dices.jpeg");*/
+background-image: url("https://media.giphy.com/media/viqA9tE9lnGP6/giphy.gif")
 }
 
 a {
