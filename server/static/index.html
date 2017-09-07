@@ -1,14 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang "en">
 <head>
   <meta charset="utf-8">
   <title>TossUp</title>
-  <link rel="stylesheet" href="/css/style.css">
+	<!-- Include personal stylesheet -->
+	<link rel="stylesheet" href="css/style.css">
+	<!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  	<!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+ 	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-  <div id="react-app"></div>
+	<!-- NavBar will appear on every page -->
+	<!-- Need to make this mobile friendly -->
+	  <nav>
+	    <div class="nav-wrapper">
+	    <a data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+	      <a href="index.html">toss</a> <strong style="font-size: 40px; color: red">UP</strong>
+	      <ul class="right hide-on-med-and-down">
+	        <li><a href="#"><i class="material-icons" style="color:black">add_box</i></a></li>
+	       	<li><a href="#"><i class="material-icons" style="color:black">notifications_active</i></a></li>
+	        <li><a href="#"><i class="material-icons" style="color:black">person_outline</i></a></li>
+	      </ul>
+	      <ul class="side-nav" id="mobile-demo">
+			<div class ="titleBox">
+				<span class="title1">toss</span>
+				<span class="title2">UP</span>
+				<p class="subtitle">Make your own luck.</p>
+			</div>
+	      	<li><a href="#"><i class="material-icons" style="color: red">home</i></a></li>
+			<li><a href="#"><i class="material-icons" style="color: gray">add_box</i>Create Bet</a></li>
+	       	<li><a href="#"><i class="material-icons" style="color: gray">notifications_active</i>Notifications</a></li>
+	        <li><a href="#"><i class="material-icons" style="color: gray">person_outline</i>Profile</a></li>
+      	</ul>
+	    </div>
+	  </nav>
+	
+	<!-- Where react will deploy its contents -->
+	<div id="react-app"></div>
 
-  <script src="/js/app.js"></script>
+	<!-- JS code transpiled in app.js -->
+	<script src="./js/app.js"></script>
+
+	<!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+    <script type="text/javascript">
+    	$( document ).ready(function(){
+    		$(".button-collapse").sideNav();
+    	});
+    </script>
 </body>
 </html>
 
