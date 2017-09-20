@@ -4,6 +4,27 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions';
 import { BrowserRouter, Redirect } from 'react-router-dom';
 
+const validate = values => {
+		const errors = {};
+
+		if (!values.email){
+			errors.email = "Please enter an email";
+		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+			errors.email = "Invalid email address"
+		}
+
+		if (!values.profilepic){
+			errors.profilepic = "But what you look like?";
+		}
+
+		if (!values.displayname){
+			errors.displayname = "But what's your name?";
+		}
+
+		return errors;
+	};
+
+
 class EditProfile extends React.Component {
 	constructor (props){
 		super(props);
@@ -17,6 +38,22 @@ class EditProfile extends React.Component {
 		this.props.editProfile(values);
 		this.setState({ redirect : true })
 	};
+
+	renderField = ({ input, label, type, meta: { touched, error } }) => (
+    	<fieldset className={`form-group ${touched && error ? 'has-error' : ''}`}>
+      		<label className="control-label">{label}</label>
+      		
+      		<div>
+        	<input {...input} 
+        		placeholder={label} 
+        		className="form-control" 
+        		type={type} 
+        	/>
+        		{ touched && error && <div className="help-block">{ error }</div> }
+      		</div>
+
+    	</fieldset>
+  );
 
 	render(){
 		const { redirect } = this.state;
@@ -35,7 +72,7 @@ class EditProfile extends React.Component {
 						<fieldset className = "form-group">
 						<label> New Display Name </label>
 						<Field name = "displayname"
-							component = "input"
+							component = {this.renderField}
 							className = "form-control"
 							type= "text"
 							placeholder = "Possibly what your mom named you" />
@@ -44,16 +81,16 @@ class EditProfile extends React.Component {
 						<fieldset className = "form-group">
 						<label> Update Profile Picture </label>
 						<Field name = "profilepic"
-							component = "input"
+							component = {this.renderField}
 							className = "form-control"
 							type= "text"
-							placeholder = "Paste url here" />
+							placeholder = "Paste photo url here" />
 						</fieldset>
 
 						<fieldset className = "form-group">
 						<label> Verify Email </label>
 						<Field name = "email"
-							component = "input"
+							component = {this.renderField}
 							className = "form-control"
 							type= "text"
 							placeholder = "Email to be contacted at" />
@@ -71,4 +108,5 @@ class EditProfile extends React.Component {
 
 export default connect(null, Actions) (reduxForm({
 	form: 'editprofile',
+	validate
 })(EditProfile));
