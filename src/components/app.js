@@ -8,13 +8,15 @@ import Signup from './Signup';
 import Login from './Login';
 import Home from './Home';
 import Profile from './Profile';
+import EditProfile from './EditProfile'
 
 //two functions that return Route components, checking if authenticated, then redirecting to login or homepage location 
 const PrivateRoute = ({component: Component, authenticated, ...props}) => {
+    console.log("private section. Authenticated? ", Component);
     return (
         <Route
             {...props}
-            render={(props) => authenticated === true
+            render= {(props) => authenticated === true
                 ? <Component {...props} />
                 : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
         />
@@ -44,6 +46,7 @@ class App extends React.Component {
                         <PublicRoute authenticated={this.props.authenticated }  path="/signup" component={ Signup } />
                         <PublicRoute authenticated={this.props.authenticated }  path="/login" component={ Login } />
                         <PrivateRoute authenticated = {this.props.authenticated } path = "/profile" component = { Profile } />
+                        <PrivateRoute authenticated = { this.props.authenticated } path = "/editprofile" component = { EditProfile } />
                         <PrivateRoute authenticated={this.props.authenticated }  path="/" component= { Home } />
                     
                     </Switch>

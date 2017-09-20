@@ -10,21 +10,30 @@ const initialState = {
 export default function user(state = initialState, action){
 	switch(action.type){
 		case FETCH_USER_INFO:
-			if (action.payload.displayName !== null){
-				let displayName = action.payload.displayName;
+			console.log(action.payload.username);
+			if (action.payload.username ){
+				var displayName = action.payload.username;
+				
 			} else{
-				displayName = 'No Namer';
+				
 			}
 
-			if (action.payload.photoURL !== null){
-				let profileURL =  action.payload.photoURL;
+			if (action.payload.profile_picture){
+				var profileURL =  action.payload.profile_picture;
+				
 			} 
 			else {
 				profileURL = '../style/images/Nopic.png';
 			}
 
-			let email = action.payload.emailVerified;
-			
+			if( action.payload.email){
+				var email = action.payload.email;
+			}
+			else {
+				email = 'nonamer@nonameyet.com';
+			}
+
+			console.log("Displayname and profilepic", displayName, profileURL);
 			return {
 				displayName: displayName,
 				email: email,
@@ -34,7 +43,7 @@ export default function user(state = initialState, action){
 		case USER_ERROR: 
 			return {
 				...state,
-				error: action.payload.message
+				error: action.payload.error
 			}
 
 		default:

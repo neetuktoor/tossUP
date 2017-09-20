@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
+import { Link } from 'react-router-dom';
 
 class Profile extends React.Component {
 
@@ -24,7 +25,7 @@ class Profile extends React.Component {
 					<img className = "profilepic" src = { this.props.Pic } />
 					<div > { this.props.Name } </div>
 					<div > Email: { this.props.Email } </div>
-					<button className = "btn btn-primary btn-lg"> Edit Profile </button>
+					<Link to = "/editprofile"><button className = "btn btn-primary btn-lg"> Edit Profile</button></Link> 
 				</div>
 			</div>
 		);

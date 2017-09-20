@@ -76,6 +76,23 @@ export function verifyAuth(){
 	}
 }
 
+//to edit profile after submitting form
+export function editProfile(updated){
+	return function(dispatch){
+		//find user id
+		const userUid = Firebase.auth().currentUser.uid;
+
+		//update the user with the new stuff in firebase
+		Firebase.database().ref('users/' + userUid).set({
+			username: updated.displayname,
+			profile_picture: updated.profilepic,
+			email: updated.email
+		}).then(() => {
+			dispatch(fetchUserInfo());
+		})
+	}
+}
+
 export function authUser(){
 	return{
 		type: AUTH_USER
@@ -102,14 +119,13 @@ export function fetchUserInfo(){
 		//find user id
 		const userUid = Firebase.auth().currentUser.uid;
 
-		Firebase.database().ref(userUid).on('value', snapshot => {
+		Firebase.database().ref('/users/' + userUid).on('value', snapshot => {
+			console.log("snapshot: ", snapshot.val());
 			dispatch({
 				type: FETCH_USER_INFO,
 				payload: snapshot.val()
 			})
-			.catch(error => {
-				dispatch(userError(error));
-			})
+			
 		});
 	}
 }
