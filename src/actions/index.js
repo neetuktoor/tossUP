@@ -4,6 +4,8 @@ export const SIGN_IN_USER = 'SIGN_IN_USER';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const FETCH_USER_INFO= 'FETCH_USER_INFO';
+export const USER_ERROR = 'USER_ERROR';
 
 //holds the shit to hold access key for firebase 
 var config = {
@@ -23,6 +25,7 @@ export function signUpUser(credentials){
 		Firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password)
 			.then(response => {
 				console.log("finished signing up in firebase");
+
 				dispatch (authUser());
 			})
 			.catch(error => {
@@ -83,5 +86,30 @@ export function authError(error){
 	return {
 		type: AUTH_ERROR, 
 		payload: error
+	}
+}
+export function userError(error){
+	return{
+		type: USER_ERROR,
+		payload: error
+	}
+}
+
+//when profile page mounts, fetch the user info to display
+export function fetchUserInfo(){
+	return function (dispatch){
+
+		//find user id
+		const userUid = Firebase.auth().currentUser.uid;
+
+		Firebase.database().ref(userUid).on('value', snapshot => {
+			dispatch({
+				type: FETCH_USER_INFO,
+				payload: snapshot.val()
+			})
+			.catch(error => {
+				dispatch(userError(error));
+			})
+		});
 	}
 }
