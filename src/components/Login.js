@@ -1,5 +1,5 @@
 import React from 'react';
-//The Field component makes it easy to connect individual inputs to the Redux store 
+//The Field component makes it easy to connect individual inputs to the Redux store
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
@@ -22,7 +22,7 @@ const validate = values => {
 	};
 
 class Login extends React.Component {
-	
+
 	handleFormSubmit = (values) => {
 		console.log(values);
 		this.props.signInUser(values);
@@ -31,12 +31,12 @@ class Login extends React.Component {
 	renderField = ({ input, label, type, meta: { touched, error } }) => (
     	<fieldset className={`form-group ${touched && error ? 'has-error' : ''}`}>
       		<label className="control-label">{label}</label>
-      		
+
       		<div>
-        	<input {...input} 
-        		placeholder={label} 
-        		className="form-control" 
-        		type={type} 
+        	<input {...input}
+        		placeholder={label}
+        		className="form-control"
+        		type={type}
         	/>
         		{ touched && error && <div className="help-block">{ error }</div> }
       		</div>
@@ -53,8 +53,8 @@ class Login extends React.Component {
 	}
 
 
-	//handleSubmit is a redux-form method! so using this.props. When we click onSubmit redux-form intercepts and run validation first 
-	//will also call handleFormSubmit which will just log our values 
+	//handleSubmit is a redux-form method! so using this.props. When we click onSubmit redux-form intercepts and run validation first
+	//will also call handleFormSubmit which will just log our values
 	render() {
     	return (
     		<div className= "container">
@@ -68,11 +68,11 @@ class Login extends React.Component {
     					<fieldset className = "form-group">
     						<label> Email </label>
 
-    						<Field 
-    							name = "email" 
-    							component = {this.renderField} 
-    							className = "form-control" 
-    							type= "text" 
+    						<Field
+    							name = "email"
+    							component = {this.renderField}
+    							className = "form-control"
+    							type= "text"
     							placeholder = "Email"
     						/>
     					</fieldset>
@@ -80,16 +80,16 @@ class Login extends React.Component {
     					<fieldset className = "form-group">
     						<label> Password </label>
 
-    						<Field 
-    							name = "password" 
-    							component = {this.renderField} 
-    							className = "form-control" 
-    							type= "password" 
+    						<Field
+    							name = "password"
+    							component = {this.renderField}
+    							className = "form-control"
+    							type= "password"
     							placeholder = "Password"
     						/>
     					</fieldset>
 
-    					<button 
+    					<button
     						action="submit"
     						className= "btn btn-primary"
     					> Sign In </button>
@@ -108,14 +108,14 @@ function mapStateToProps(state){
 }
 
 //because component doesn't currently care about any state outside of form itself, we are going to hold off
-//on adding the react-reduc connect 
+//on adding the react-reduc connect
 
-//reduxForm connects our form to redux --> unique name for the form called login (this will be set as key 
+//reduxForm connects our form to redux --> unique name for the form called login (this will be set as key
 // on the store objeect returned to Formreducer)
 
-//Tje reason why we're not using mapDispatchToProps or bindActionCreators is because we're passing 
+//Tje reason why we're not using mapDispatchToProps or bindActionCreators is because we're passing
 //actions directly and login and signup don't have child components so we dont' need
-// to pass action creatos down as props from container to component 
+// to pass action creatos down as props from container to component
 export default connect(mapStateToProps, Actions)(reduxForm({
 	form: 'login',
 	validate
