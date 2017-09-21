@@ -85,7 +85,7 @@ export function editProfile(updated){
 		const userUid = Firebase.auth().currentUser.uid;
 
 		//update the user with the new stuff in firebase
-		Firebase.database().ref('users/' + userUid).set({
+		Firebase.database().ref('users/' + userUid).update({
 			username: updated.displayname,
 			profile_picture: updated.profilepic,
 			email: updated.email
@@ -121,7 +121,7 @@ export function fetchUserInfo(){
 		//find user id
 		const userUid = Firebase.auth().currentUser.uid;
 
-		Firebase.database().ref('/users/' + userUid).set('value', snapshot => {
+		Firebase.database().ref('/users/' + userUid).on('value', snapshot => {
 			//console.log("snapshot: ", snapshot.val());
 			dispatch({
 				type: FETCH_USER_INFO,
@@ -132,47 +132,39 @@ export function fetchUserInfo(){
 	}
 }
 
-//capture inputs from form and store them in the bets table
-// export function createBet(bets){
-//   return function(dispatch) {
-//
-//     Firebase.database().ref('/bets/')
-// //
-// //     .push('value', snapshot => {
-// //     return{}
-// //       dispatch({
-// // 				type: CREATE_BET,
-// // 				payload: snapshot.val()
-// //       })
-// //
-// //     });
-// //   }
-// // }
+
 
 export function createBet(bets){
 	return function(dispatch){
-		Firebase.database().ref('/bets/').set(bets)
-    .then(() => {
-      dispatch({
-        type: CREATE_BET
 
-			(storeUserBet())
-			})
-
-    });
-  }
-}
-
-export function storeUserBet() {
-	return function (dispatch){
-
-		//find user id
-		const betTitle = Firebase.auth().bets.title;
-
-		Firebase.database().ref('/users/' + betTitle).set()
-			dispatch({
-        		type: ADD_TO_USER
-			})
-
+		var betRef = Firebase.database().ref('/bets/').push();
+		var key = betRef.key;
+		var betData = {
+			id: key,
+			title: bets.title,
+			prize: bets.prize,
+			date: bets.date,
+			addUser: bets.addUser
 		};
+
+		console.log("key just made", key);
+
+		betRef.update(betData);
+		
+  	}
 }
+
+//function to send notifications to user just added to new bet 
+export function betAddedNotif(betadded){
+
+	//find the unique id of the bet just added 
+
+	//find the unique id of the user email added to bet 
+
+	//ref notifications/useruniqueid and set to a uniqueid just added 
+
+}
+
+
+
+
