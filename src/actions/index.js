@@ -7,6 +7,7 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const FETCH_USER_INFO= 'FETCH_USER_INFO';
 export const USER_ERROR = 'USER_ERROR';
 export const CREATE_BET = 'CREATE_BET';
+export const ADD_TO_USER = 'ADD_TO_USER;'
 
 //holds the shit to hold access key for firebase
 var config = {
@@ -132,16 +133,46 @@ export function fetchUserInfo(){
 }
 
 //capture inputs from form and store them in the bets table
-export function createBet(bets){
-  return function(dispatch) {
+// export function createBet(bets){
+//   return function(dispatch) {
+//
+//     Firebase.database().ref('/bets/')
+// //
+// //     .push('value', snapshot => {
+// //     return{}
+// //       dispatch({
+// // 				type: CREATE_BET,
+// // 				payload: snapshot.val()
+// //       })
+// //
+// //     });
+// //   }
+// // }
 
-    Firebase.database().ref('/bets/').push('value', snapshot => {
-    return{}
+export function createBet(bets){
+	return function(dispatch){
+		Firebase.database().ref('/bets/').set(bets)
+    .then(() => {
       dispatch({
-				type: CREATE_BET,
-				payload: snapshot.val()
-      })
+        type: CREATE_BET
+
+			(storeUserBet())
+			})
 
     });
   }
+}
+
+export function storeUserBet() {
+	return function (dispatch){
+
+		//find user id
+		const betTitle = Firebase.auth().bets.title;
+
+		Firebase.database().ref('/users/' + betTitle).set()
+			dispatch({
+        type: ADD_TO_USER
+			})
+
+		};
 }

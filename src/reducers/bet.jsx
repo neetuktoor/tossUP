@@ -1,48 +1,19 @@
-import { CREATE_BET } from '../actions';
+import { CREATE_BET, ADD_TO_USER } from '../actions';
 
 export default function (state={}, action) {
 	switch(action.type){
-		case FETCH_USER_INFO:
-    if (action.payload.title ){
+
+		case CREATE_BET:
       var displayTitle = action.payload.title;
-    }
-    }else{
-
-    }
-
-    if (action.payload.prize ){
+      var displayDescription = action.payload.description;
+      var displayDate = action. payload.date;
+      var addUser = action.payload.addUser;
       var displayPrize = action.payload.prize;
 
-    }else{
+    case ADD_TO_USER:
+      var displayTitle = action.payload.title;
 
-    }
 
-    if (action.payload.description ){
-      var displayDescription = action.payload.description;
-
-    }else{
-
-    }
-
-    if (action.payload.date ){
-      var displayDate = action.payload.date;
-
-    }else{
-
-    }
-
-      if(action.payload.addUser) {
-        var displayUser = action.payload.addUser;
-      }
-
-     return {
-       displayTitle: displayTitle,
-       displayPrize: displayPrize,
-       displayDescription: displayDescription,
-       displayDate: displayDate,
-       displayUser: displayUser
-
-    };
 
     default:
 
