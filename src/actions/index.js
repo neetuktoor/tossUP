@@ -137,27 +137,5 @@ export function fetchUserInfo(){
 export function createBet(bets){
 	return function(dispatch){
 		Firebase.database().ref('/bets/').push(bets)
-    // .then(() => {
-    //   dispatch({
-    //     type: CREATE_BET
-    //
-		// 	(storeUserBet())
-		// 	})
-    //
-    // });
-  }
-}
 
-// export function storeUserBet() {
-// 	return function (dispatch){
-//
-// 		//find user id
-// 		const betTitle = Firebase.auth().bets.title;
-//
-// 		Firebase.database().ref('/users/' + betTitle).set()
-// 			dispatch({
-//         type: ADD_TO_USER
-// 			})
-//
-// 		};
-// }
+}
