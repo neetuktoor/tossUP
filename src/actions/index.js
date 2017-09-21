@@ -137,6 +137,7 @@ export function fetchUserInfo(){
 export function createBet(bets){
 	return function(dispatch){
 
+
 		var betRef = Firebase.database().ref('/bets/').push();
 		var key = betRef.key;
 		var betData = {
@@ -164,6 +165,7 @@ export function betAddedNotif(betadded){
 	//ref notifications/useruniqueid and set to a uniqueid just added 
 
 }
+
 
 
 
