@@ -132,34 +132,19 @@ export function fetchUserInfo(){
 	}
 }
 
-//capture inputs from form and store them in the bets table
-// export function createBet(bets){
-//   return function(dispatch) {
-//
-//     Firebase.database().ref('/bets/')
-// //
-// //     .push('value', snapshot => {
-// //     return{}
-// //       dispatch({
-// // 				type: CREATE_BET,
-// // 				payload: snapshot.val()
-// //       })
-// //
-// //     });
-// //   }
-// // }
+
 
 export function createBet(bets){
 	return function(dispatch){
 		Firebase.database().ref('/bets/').set(bets)
-    .then(() => {
-      dispatch({
-        type: CREATE_BET
-
-			(storeUserBet())
-			})
-
-    });
+    // .then(() => {
+    //   dispatch({
+    //     type: CREATE_BET
+    //
+		// 	(storeUserBet())
+		// 	})
+    //
+    // });
   }
 }
 
