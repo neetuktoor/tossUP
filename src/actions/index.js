@@ -136,7 +136,7 @@ export function fetchUserInfo(){
 
 export function createBet(bets){
 	return function(dispatch){
-		Firebase.database().ref('/bets/').set(bets)
+		Firebase.database().ref('/bets/').push(bets)
     // .then(() => {
     //   dispatch({
     //     type: CREATE_BET
@@ -148,16 +148,16 @@ export function createBet(bets){
   }
 }
 
-export function storeUserBet() {
-	return function (dispatch){
-
-		//find user id
-		const betTitle = Firebase.auth().bets.title;
-
-		Firebase.database().ref('/users/' + betTitle).set()
-			dispatch({
-        type: ADD_TO_USER
-			})
-
-		};
-}
+// export function storeUserBet() {
+// 	return function (dispatch){
+//
+// 		//find user id
+// 		const betTitle = Firebase.auth().bets.title;
+//
+// 		Firebase.database().ref('/users/' + betTitle).set()
+// 			dispatch({
+//         type: ADD_TO_USER
+// 			})
+//
+// 		};
+// }
