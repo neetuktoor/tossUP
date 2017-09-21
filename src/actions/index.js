@@ -120,7 +120,7 @@ export function fetchUserInfo(){
 		//find user id
 		const userUid = Firebase.auth().currentUser.uid;
 
-		Firebase.database().ref('/users/' + userUid).on('value', snapshot => {
+		Firebase.database().ref('/users/' + userUid).set('value', snapshot => {
 			//console.log("snapshot: ", snapshot.val());
 			dispatch({
 				type: FETCH_USER_INFO,
@@ -132,11 +132,11 @@ export function fetchUserInfo(){
 }
 
 //capture inputs from form and store them in the bets table
-export function createBet(){
+export function createBet(bets){
   return function(dispatch) {
 
-    Firebase.database().ref('/bets/').set('value', snapshot => {
-      console.log(snapshot.val());
+    Firebase.database().ref('/bets/').push('value', snapshot => {
+    return{}
       dispatch({
 				type: CREATE_BET,
 				payload: snapshot.val()

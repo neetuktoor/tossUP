@@ -13,9 +13,16 @@ const validate = values => {
 		if (!values.prize){
 			errors.prize = "Please enter a prize for what is at stake.";
 		}
+
+    if(!values.description){
+      errors.description = "Please enter a short description."
+    }
+
     if (!values.date){
-			errors.description = "Please enter an end date for the bet.";
-		} else if(values.date < Date.now)
+			errors.date = "Please enter an end date for the bet.";
+		} else if(values.date < Date.now()) {
+      errors.date = "This date has already passed.";
+    }
     if (!values.addUser){
       errors.addUser = "Please add another user to the bet.";
     }

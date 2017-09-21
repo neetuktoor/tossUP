@@ -6,33 +6,41 @@ export default function (state={}, action) {
     if (action.payload.title ){
       var displayTitle = action.payload.title;
     }
-    // }else{
-    //
-    // }
-    //
-    // if (action.payload.prize ){
-    //   var displayPrize = action.payload.prize;
-    //
-    // }else{
-    //
-    // }
-    //
-    // if (action.payload.date ){
-    //   var displayDate = action.payload.date;
-    //
-    // }else{
-    //
-    // }
-    //
-    //   if(action.payload.addUser) {
-    //     var displayUser = action.payload.addUser;
-    //   }
+    }else{
+
+    }
+
+    if (action.payload.prize ){
+      var displayPrize = action.payload.prize;
+
+    }else{
+
+    }
+
+    if (action.payload.description ){
+      var displayDescription = action.payload.description;
+
+    }else{
+
+    }
+
+    if (action.payload.date ){
+      var displayDate = action.payload.date;
+
+    }else{
+
+    }
+
+      if(action.payload.addUser) {
+        var displayUser = action.payload.addUser;
+      }
 
      return {
        displayTitle: displayTitle,
-      //  displayPrize: displayPrize,
-      //  displayDate: displayDate,
-      //  displayUser: displayUser
+       displayPrize: displayPrize,
+       displayDescription: displayDescription,
+       displayDate: displayDate,
+       displayUser: displayUser
 
     };
 

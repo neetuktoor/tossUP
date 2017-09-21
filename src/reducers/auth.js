@@ -10,14 +10,14 @@ export default function bets(state = initialState, action){
 	switch (action.type){
 		case AUTH_USER:
 			return{
-				...state, 
+				...state,
 				authenticated: true,
 				error: null
 			};
 
 		case SIGN_OUT_USER:
 			return{
-				...state, 
+				...state,
 				authenticated: false,
 				error: null
 			};
