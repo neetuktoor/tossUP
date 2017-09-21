@@ -121,7 +121,7 @@ export function fetchUserInfo(){
 		//find user id
 		const userUid = Firebase.auth().currentUser.uid;
 
-		Firebase.database().ref('/users/' + userUid).set('value', snapshot => {
+		Firebase.database().ref('/users/' + userUid).on('value', snapshot => {
 			//console.log("snapshot: ", snapshot.val());
 			dispatch({
 				type: FETCH_USER_INFO,
@@ -138,4 +138,5 @@ export function createBet(bets){
 	return function(dispatch){
 		Firebase.database().ref('/bets/').push(bets)
 
+  }
 }
