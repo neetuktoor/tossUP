@@ -171,7 +171,7 @@ export function storeUserBet() {
 
 		Firebase.database().ref('/users/' + betTitle).set()
 			dispatch({
-        type: ADD_TO_USER
+        		type: ADD_TO_USER
 			})
 
 		};
