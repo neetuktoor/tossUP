@@ -85,7 +85,7 @@ export function editProfile(updated){
 		const userUid = Firebase.auth().currentUser.uid;
 
 		//update the user with the new stuff in firebase
-		Firebase.database().ref('users/' + userUid).set({
+		Firebase.database().ref('users/' + userUid).update({
 			username: updated.displayname,
 			profile_picture: updated.profilepic,
 			email: updated.email
@@ -132,11 +132,55 @@ export function fetchUserInfo(){
 	}
 }
 
-
-
 export function createBet(bets){
 	return function(dispatch){
-		Firebase.database().ref('/bets/').push(bets)
 
+		var betRef = Firebase.database().ref('/bets/').push();
+		var key = betRef.key;
+		var betData = {
+			id: key,
+			title: bets.title,
+			prize: bets.prize,
+			date: bets.date,
+      description: bets.description,
+			addUser: bets.addUser
+		};
+
+		console.log("key just made", key);
+
+		betRef.update(betData);
+
+    //find user id
+		const userUid = Firebase.auth().currentUser.uid;
+
+    Firebase.database().ref('/users/' + userUid).push({
+        bets: betData.id
+    });
   }
+}
+
+
+//function to send notifications to user just added to new bet
+export function betAddedNotif(betadded){
+
+	//find the unique id of the bet just added
+	var betID = betadded.id;
+	var inviter = betadded.inviter;
+	console.log("Bet unique:", betID);
+
+	//find the unique id of the user email added to bet
+	Firebase.database().ref().child('users').orderByChild('email').equalTo(betadded.addUser).on('value', function(snapshot){
+
+		var keys = Object.keys(snapshot.val());
+		console.log(keys);
+		//this the user unique id
+		var userID = keys[0];
+
+		//ref notifications/useruniqueid and set to a uniqueid just added
+		Firebase.database().ref('/notifications/' + userID + '/betsAddedTo/'+ betID).update({
+			bet: betID,
+			inviter: inviter
+		});
+
+	});
 }
