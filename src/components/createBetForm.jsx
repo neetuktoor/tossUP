@@ -2,6 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
+import { BrowserRouter, Redirect } from 'react-router-dom';
 
 const validate = values => {
 		const errors = {};
@@ -32,10 +33,17 @@ const validate = values => {
 	};
 
 class createBetForm extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      redirect: false
+    }
+  }
 
   handleFormSubmit = (values) => {
 		console.log(values);
 		this.props.createBet(values);
+    this.setState({ redirect: true })
 	};
 
   renderField = ({ input, label, type, meta: { touched, error } }) => (
@@ -55,6 +63,12 @@ class createBetForm extends React.Component {
   );
 
   render() {
+      const { redirect } = this.state;
+
+      if(redirect){
+        return <Redirect to = '/' />;
+      }
+
       return (
         <div className= "container">
           <div className = "col-md-6 col-md-offset-3">

@@ -92,6 +92,7 @@ export function editProfile(updated){
 		}).then(() => {
 			dispatch(fetchUserInfo());
 		})
+
 	}
 }
 
