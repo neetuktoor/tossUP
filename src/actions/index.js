@@ -163,7 +163,7 @@ export function createBet(bets){
 //function to send notifications to user just added to new bet
 export function betAddedNotif(betadded){
 
-	//find the unique id of the bet just added
+	//find unique id of the bet just added
 	var betID = betadded.id;
 	var inviter = betadded.inviter;
 	console.log("Bet unique:", betID);
