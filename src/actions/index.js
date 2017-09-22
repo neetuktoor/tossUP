@@ -83,15 +83,16 @@ export function editProfile(updated){
 	return function(dispatch){
 		//find user id
 		const userUid = Firebase.auth().currentUser.uid;
-
-		//update the user with the new stuff in firebase
+		
 		Firebase.database().ref('users/' + userUid).update({
+			id: userUid,
 			username: updated.displayname,
 			profile_picture: updated.profilepic,
 			email: updated.email
 		}).then(() => {
 			dispatch(fetchUserInfo());
 		})
+
 	}
 }
 
@@ -136,7 +137,7 @@ export function fetchUserInfo(){
 
 export function createBet(bets){
 	return function(dispatch){
-
+		var inviter = Firebase.auth().currentUser.uid;
 
 		var betRef = Firebase.database().ref('/bets/').push();
 		var key = betRef.key;
@@ -145,12 +146,16 @@ export function createBet(bets){
 			title: bets.title,
 			prize: bets.prize,
 			date: bets.date,
-			addUser: bets.addUser
+			addUser: bets.addUser,
+			inviter: inviter
 		};
 
 		console.log("key just made", key);
 
-		betRef.update(betData);
+		betRef.update(betData, function(error){
+			console.log(betData);
+			betAddedNotif(betData);
+		});
 		
   	}
 }
@@ -159,11 +164,25 @@ export function createBet(bets){
 export function betAddedNotif(betadded){
 
 	//find the unique id of the bet just added 
+	var betID = betadded.id;
+	var inviter = betadded.inviter;
+	console.log("Bet unique:", betID);
 
 	//find the unique id of the user email added to bet 
+	Firebase.database().ref().child('users').orderByChild('email').equalTo(betadded.addUser).on('value', function(snapshot){
+		
+		var keys = Object.keys(snapshot.val());
+		console.log(keys);
+		//this the user unique id
+		var userID = keys[0];
 
-	//ref notifications/useruniqueid and set to a uniqueid just added 
+		//ref notifications/useruniqueid and set to a uniqueid just added 
+		Firebase.database().ref('/notifications/' + userID + '/betsAddedTo/'+ betID).update({
+			bet: betID,
+			inviter: inviter
+		});
 
+	});
 }
 
 
