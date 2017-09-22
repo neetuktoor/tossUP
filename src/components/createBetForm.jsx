@@ -46,6 +46,12 @@ class createBetForm extends React.Component {
     this.setState({ redirect: true })
 	};
 
+  render() {
+    if (this.state.redirect) {
+      <Redirect to = "/" />
+    }
+  }
+
   renderField = ({ input, label, type, meta: { touched, error } }) => (
     	<fieldset className={`form-group ${touched && error ? 'has-error' : ''}`}>
       		<label className="control-label">{label}</label>
