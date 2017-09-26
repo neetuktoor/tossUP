@@ -27,7 +27,7 @@ class NotifList extends React.Component {
 	
 	invited (){
 		var arr = this.props.notifInvited.map((notif) => {
-		console.log("whatishits", notif);
+		
 		return <NotifInvite key = { notif.bet }
 							notif = { notif }
 							

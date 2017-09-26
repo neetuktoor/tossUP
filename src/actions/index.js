@@ -208,7 +208,13 @@ export function fetchInviteNotifs(){
 				
 				invites.push({bet: snapshot.val().betsAddedTo[bet].bet, inviter: snapshot.val().betsAddedTo[bet].inviter});
 			})
-			
+
+			//for each of the bets find the firebase user and bet name
+			invites.map(function(lol){
+				Firebase.database().ref('/bets/' + lol.bet + '/title').on('value', snapshot =>{
+					
+				})
+			})
 
 			//sending the notifications for that user to reducers
 			dispatch({

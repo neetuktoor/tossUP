@@ -24,9 +24,11 @@ const validate = values => {
 		} else if(values.date < Date.now()) {
       errors.date = "This date has already passed.";
     }
+
     if (!values.addUser){
       errors.addUser = "Please add another user to the bet.";
     }
+
 		return errors;
 	};
 
@@ -43,6 +45,12 @@ class createBetForm extends React.Component {
 		this.props.createBet(values);
     this.setState({ redirect: true })
 	};
+
+  render() {
+    if (this.state.redirect) {
+      <Redirect to = "/" />
+    }
+  }
 
   renderField = ({ input, label, type, meta: { touched, error } }) => (
     	<fieldset className={`form-group ${touched && error ? 'has-error' : ''}`}>
@@ -83,6 +91,18 @@ class createBetForm extends React.Component {
                   className = "form-control"
                   type= "text"
                   placeholder = "Title"
+                />
+              </fieldset>
+
+              <fieldset className = "form-group">
+                <label> Description </label>
+
+                <Field
+                  name = "description"
+                  component = {this.renderField}
+                  className = "form-control"
+                  type= "text"
+                  placeholder = "Enter a short description."
                 />
               </fieldset>
 
