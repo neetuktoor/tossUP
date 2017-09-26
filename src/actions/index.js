@@ -158,8 +158,8 @@ export function createBet(bets){
 			betAddedNotif(betData);
 		});
 
-    Firebase.database().ref('/users/' + inviter).push({
-        bets: betData.id
+    Firebase.database().ref('/users/' + inviter + '/bets/' + key).update({
+        bets: key
     });
     }
     // .then(() => {
