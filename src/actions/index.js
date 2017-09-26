@@ -7,7 +7,8 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const FETCH_USER_INFO= 'FETCH_USER_INFO';
 export const USER_ERROR = 'USER_ERROR';
 export const CREATE_BET = 'CREATE_BET';
-export const ADD_TO_USER = 'ADD_TO_USER;'
+export const ADD_TO_USER = 'ADD_TO_USER';
+export const FETCH_INVITE_NOTIFICATIONS = 'FETCH_INVITE_NOTIFICATIONS';
 
 //holds the shit to hold access key for firebase
 var config = {
@@ -180,11 +181,45 @@ export function betAddedNotif(betadded){
 		Firebase.database().ref('/notifications/' + userID + '/betsAddedTo/'+ betID).update({
 			bet: betID,
 			inviter: inviter
-		});
+		}).then(() => {
+
+			//fetch notifications to render on notifications page 
+		})
 
 	});
 }
 
+//function to get all the notifications for that user to the database
+export function fetchInviteNotifs(){
+	
+	return function(dispatch){
+		//find the unique id of the current user
+		const user = Firebase.auth().currentUser.uid;
+
+		//search the database for notifications under that user unique id
+		Firebase.database().ref('/notifications/' + user).on('value', snapshot => {
+			
+			var invitearr = Object.keys(snapshot.val().betsAddedTo);
+			// console.log("notifications" , snapshot.val().betsAddedTo[invitearr[0]]);
+			var invites = [];
+
+			//make an array of objects containing the inviter and bet id
+			invitearr.forEach(function(bet){
+				
+				invites.push({bet: snapshot.val().betsAddedTo[bet].bet, inviter: snapshot.val().betsAddedTo[bet].inviter});
+			})
+			
+
+			//sending the notifications for that user to reducers
+			dispatch({
+				type: FETCH_INVITE_NOTIFICATIONS,
+				payload: invites
+			});
+		});
+
+	}
+
+}
 
 
 
