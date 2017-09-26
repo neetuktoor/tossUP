@@ -154,6 +154,14 @@ class createBetForm extends React.Component {
   }
 }
 
+function mapStateToProps(state){
+	return {
+		Name: state.user.displayName,
+		Email: state.user.email,
+		Pic: state.user.profileURL,
+		Error: state.user.error
+	};
+}
 
 
 export default connect(null, Actions)(reduxForm({

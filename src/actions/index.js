@@ -7,7 +7,8 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const FETCH_USER_INFO= 'FETCH_USER_INFO';
 export const USER_ERROR = 'USER_ERROR';
 export const CREATE_BET = 'CREATE_BET';
-export const ADD_TO_USER = 'ADD_TO_USER;'
+export const ADD_TO_USER = 'ADD_TO_USER';
+export const FETCH_INVITE_NOTIFICATIONS = 'FETCH_INVITE_NOTIFICATIONS';
 
 //holds the shit to hold access key for firebase
 var config = {
@@ -84,8 +85,8 @@ export function editProfile(updated){
 		//find user id
 		const userUid = Firebase.auth().currentUser.uid;
 
-		//update the user with the new stuff in firebase
 		Firebase.database().ref('users/' + userUid).update({
+			id: userUid,
 			username: updated.displayname,
 			profile_picture: updated.profilepic,
 			email: updated.email
@@ -133,8 +134,11 @@ export function fetchUserInfo(){
 	}
 }
 
+
+
 export function createBet(bets){
 	return function(dispatch){
+		var inviter = Firebase.auth().currentUser.uid;
 
 		var betRef = Firebase.database().ref('/bets/').push();
 		var key = betRef.key;
@@ -143,28 +147,30 @@ export function createBet(bets){
 			title: bets.title,
 			prize: bets.prize,
 			date: bets.date,
-      description: bets.description,
-			addUser: bets.addUser
+			addUser: bets.addUser,
+			inviter: inviter
 		};
 
 		console.log("key just made", key);
 
-		betRef.update(betData);
+		betRef.update(betData, function(error){
+			console.log(betData);
+			betAddedNotif(betData);
+		});
 
-    //find user id
-		const userUid = Firebase.auth().currentUser.uid;
-
-    Firebase.database().ref('/users/' + userUid).push({
+    Firebase.database().ref('/users/' + inviter).push({
         bets: betData.id
     });
+    }
+    // .then(() => {
+    //   dispatch(fetchBetInfo());
+    // });
   }
-}
-
 
 //function to send notifications to user just added to new bet
 export function betAddedNotif(betadded){
 
-	//find unique id of the bet just added
+	//find the unique id of the bet just added
 	var betID = betadded.id;
 	var inviter = betadded.inviter;
 	console.log("Bet unique:", betID);
@@ -181,7 +187,48 @@ export function betAddedNotif(betadded){
 		Firebase.database().ref('/notifications/' + userID + '/betsAddedTo/'+ betID).update({
 			bet: betID,
 			inviter: inviter
-		});
+		}).then(() => {
+
+			//fetch notifications to render on notifications page
+		})
 
 	});
+}
+
+//function to get all the notifications for that user to the database
+export function fetchInviteNotifs(){
+
+	return function(dispatch){
+		//find the unique id of the current user
+		const user = Firebase.auth().currentUser.uid;
+
+		//search the database for notifications under that user unique id
+		Firebase.database().ref('/notifications/' + user).on('value', snapshot => {
+
+			var invitearr = Object.keys(snapshot.val().betsAddedTo);
+			// console.log("notifications" , snapshot.val().betsAddedTo[invitearr[0]]);
+			var invites = [];
+
+			//make an array of objects containing the inviter and bet id
+			invitearr.forEach(function(bet){
+
+				invites.push({bet: snapshot.val().betsAddedTo[bet].bet, inviter: snapshot.val().betsAddedTo[bet].inviter});
+			})
+
+			//for each of the bets find the firebase user and bet name
+			invites.map(function(lol){
+				Firebase.database().ref('/bets/' + lol.bet + '/title').on('value', snapshot =>{
+
+				})
+			})
+
+			//sending the notifications for that user to reducers
+			dispatch({
+				type: FETCH_INVITE_NOTIFICATIONS,
+				payload: invites
+			});
+		});
+
+	}
+
 }
