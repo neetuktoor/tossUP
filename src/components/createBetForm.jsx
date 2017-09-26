@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
