@@ -7,22 +7,18 @@ import { BrowserRouter, Redirect } from 'react-router-dom';
 class betItem extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      fetched: false
-    }
+    
   }
 
-  renderBetItem = () => {
-    console.log("bet item", this.state.responded)
-        if (!this.state.fetched) {
-          return <img src = '../style/images/loading.jpg'/>
-        }
-          return <div> booioi </div>
-        }
-
-        render(){
-          return <div> { this.renderBetItem() } </div>
-        }
+  render(){
+    return(
+      <div>
+        <h2> { this.props.bet.bet } </h2>
+        <h3>{this.props.bet.participant1} vs. {this.props.bet.participant2}</h3>
+        Prize: { this.props.bet.prize }
+      </div>
+    );
+  }
 }
 
 export default betItem;

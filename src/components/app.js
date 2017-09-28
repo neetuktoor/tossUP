@@ -12,7 +12,6 @@ import EditProfile from './EditProfile';
 import createBetForm from './createBetForm';
 import NotifList from './NotifList';
 import betList from './betList';
-import betItem from './betItem';
 
 
 //two functions that return Route components, checking if authenticated, then redirecting to login or homepage location
@@ -51,7 +50,6 @@ class App extends React.Component {
                         <PublicRoute authenticated={this.props.authenticated }  path="/signup" component={ Signup } />
                         <PublicRoute authenticated={this.props.authenticated }  path="/login" component={ Login } />
                         <PrivateRoute authenticated = { this.props.authenticated } path = "/notifications" component= { NotifList } />
-                        <PrivateRoute authenticated = { this.props.authenticated } path = "/betItem" component= { betItem } />
                         <PrivateRoute authenticated = { this.props.authenticated } path = "/bets" component= { betList } />
                         <PrivateRoute authenticated = {this.props.authenticated } path = "/profile" component = { Profile } />
                         <PrivateRoute authenticated = { this.props.authenticated } path = "/editprofile" component = { EditProfile } />

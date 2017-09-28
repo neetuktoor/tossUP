@@ -1,7 +1,7 @@
 import {FETCH_BETS} from '../actions';
 
 const initialState = {
-  currentBets: []
+  currentBets: [{bet: '', prize: '', participant1: '', participant2: ''}]
 }
 
 export default function bets (state = initialState, action) {
@@ -12,8 +12,7 @@ export default function bets (state = initialState, action) {
         currentBets: action.payload
       }
 
-      default:
-
-        return state;
+    default:
+      return state;
   }
 }

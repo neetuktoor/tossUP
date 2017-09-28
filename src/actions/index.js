@@ -182,32 +182,85 @@ export function fetchBetInfo(){
     //search the database for bets under that unique id
     Firebase.database().ref('/users/' + currentUser).on('value', snapshot => {
 
-      //capture the bets in an array
-      var betArray = Object.keys(snapshot.val().bets);
-      // console.log("bets" , snapshot.val().bets[betArray[1]]);
+    	//if doesn't exist, send back data with empty strings 
+		if (snapshot.val() === null) { dispatch({
+			type: FETCH_INVITE_NOTIFICATIONS,
+			payload: [{bet: '', prize: '', participant1: '', participant2: ''}]
+			})			
+		}	
+
+		if (snapshot.val() !== null && snapshot.val().bets !== undefined){
+  	 	   //capture the bets in an array
+   		   var betArray = Object.keys(snapshot.val().bets);
+    	  // console.log("bets" , snapshot.val().bets[betArray[1]]);
+
+    	  var currentBets = [];
+
+    	  //make an array of objects containing current user and bet id
+    	  betArray.forEach(function(wager){
+    	    currentBets.push({bet: snapshot.val().bets[wager].bets, user: snapshot.val().username});
+    	  });
+
+    	  //for each of the bets, find bet name, added user & prize
+    	  var info = currentBets.map(function(infos){
+    	  	
+    	    Firebase.database().ref('/bets/' + infos.bet ).on('value', snap => {
+    	    	
+   		     	var hello =  snap.val().inviter;
+   		     	var bett = snap.val().title;
+   		     	var prizee = snap.val().prize;
+   		     	var p2 = snap.val().addUser;
+   		     	var p1 = snap.val().inviter;
+   		     });
+   		     	if (currentUser === hello){
+   		     		return {
+   		     			bet: bett,
+   		     			prize: prizee,
+   		     			participant1: info.user,
+   		     			participant2: p2
+   		     		}
+   		     	}
+   		     	
+   		     	else{
+   		     		return{
+   		     			bet: bett,
+   		     			prize: prizee,
+   		     			participant1: info.user,
+   		     			participant2: p1
+   		     		}
+   		     	}
+     	   });
+    	  
+		console.log("data", info);
+    	  //for each bet detail of variable info, find the username of participant2
+    	  var betInfo = info.map(function(data){
+
+    	  	Firebase.database().ref('/users/' + data.participant2 + '/username').on('value',snapshot =>{
+    	  		return{
+    	  			bet: data.bet,
+    	  			prize: data.prize,
+    	  			participant1: data.participant1,
+    	  			participant2: snapshot.val()
+    	  		}
+    	  	});
+    	  });
+
+    	  dispatch({
+    	  	type: FETCH_BETS,
+    	  	payload: betInfo
+    	  })
+    	 }
 
 
-      var currentBets = [];
-
-      //make an array of objects containing current user and bet id
-      betArray.forEach(function(wager){
-        currentBets.push({bet: snapshot.val().bets[wager].bets, user: snapshot.val().bets[wager].inviter});
-      })
-
-      //for each of the bets, find bet name, added user & prize
-      currentBets.map(function(info){
-        Firebase.database().ref('/bets/' + info.wager + '/title').on('value', snapshot => {
-
-        })
-      })
-
-      //sending the bets for that user to reducers
-      dispatch({
-				type: FETCH_BETS,
-				payload: currentBets
-        // payload: snapshot.val()
+     	 //sending the bets for that user to reducers
+     	 else { 
+     	 	dispatch({
+					type: FETCH_BETS,
+					payload: [{bet: '', prize: '', participant1: '', participant2: ''}]
 			});
+     	}
 		});
+			
 
 	}
 }
