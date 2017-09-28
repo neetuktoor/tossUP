@@ -9,6 +9,7 @@ export const USER_ERROR = 'USER_ERROR';
 export const CREATE_BET = 'CREATE_BET';
 export const ADD_TO_USER = 'ADD_TO_USER';
 export const FETCH_INVITE_NOTIFICATIONS = 'FETCH_INVITE_NOTIFICATIONS';
+export const FETCH_BETS = 'FETCH_BETS';
 
 //holds the shit to hold access key for firebase
 var config = {
@@ -155,17 +156,61 @@ export function createBet(bets){
 
 		betRef.update(betData, function(error){
 			console.log(betData);
-			betAddedNotif(betData);
+			betAddedNotifNOTIF(betData);
 		});
 
     Firebase.database().ref('/users/' + inviter + '/bets/' + key).update({
-        bets: key
-    });
-    }
-    // .then(() => {
-    //   dispatch(fetchBetInfo());
-    // });
-  }
+        bets: key,
+        inviter: inviter
+
+      }).then(() => {
+
+          //fetch bets to render on current bets page
+      })
+
+    };
+}
+
+//function to fetch all the bets for that user in the database
+export function fetchBetInfo(){
+
+  return function(dispatch){
+
+    //find unique id of the current user
+    var currentUser = Firebase.auth().currentUser.uid;
+
+    //search the database for bets under that unique id
+    Firebase.database().ref('/users/' + currentUser).on('value', snapshot => {
+
+      //capture the bets in an array
+      var betArray = Object.keys(snapshot.val().bets);
+      // console.log("bets" , snapshot.val().bets[betArray[1]]);
+
+
+      var currentBets = [];
+
+      //make an array of objects containing current user and bet id
+      betArray.forEach(function(wager){
+        currentBets.push({bet: snapshot.val().bets[wager].bets, user: snapshot.val().bets[wager].inviter});
+      })
+
+      //for each of the bets, find bet name, added user & prize
+      currentBets.map(function(info){
+        Firebase.database().ref('/bets/' + info.wager + '/title').on('value', snapshot => {
+
+        })
+      })
+
+      //sending the bets for that user to reducers
+      dispatch({
+				type: FETCH_BETS,
+				payload: currentBets
+        // payload: snapshot.val()
+			});
+		});
+
+	}
+}
 
 //function to send notifications to user just added to new bet
 export function betAddedNotif(betadded){
@@ -224,7 +269,7 @@ export function fetchInviteNotifs(){
 
 			//sending the notifications for that user to reducers
 			dispatch({
-				type: FETCH_INVITE_NOTIFICATIONS,
+				type: FETCH_INVITE_ICATIONS,
 				payload: invites
 			});
 		});

@@ -24,7 +24,7 @@ class Footer extends React.Component {
   					<Link className="navbar-brand" to = "/login"><img src = "../style/images/homepage.jpg"/></Link>
   					<Link className="navbar-brand" to = "/notifications"><img src = "../style/images/notification.png"/></Link>
   					<Link className="navbar-brand" to = "/profile"><img src = "../style/images/profile.jpg"/></Link>
-            		<Link className="navbar-brand" to = "/createbet"><img src = "../style/images/add.png"/></Link>
+            <Link className="navbar-brand" to = "/createbet"><img src = "../style/images/add.png"/></Link>
 				</div>
 				);
 		}
