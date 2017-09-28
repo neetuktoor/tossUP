@@ -14,7 +14,7 @@ class Header extends React.Component {
 		if (this.props.authenticated){
 			return [
 			<li className = "nav-item" key = {1}>
-				<Link className = "nav-link" to= "/"> Current Bets </Link>
+				<Link className = "nav-link" to= "/bets"> Current Bets </Link>
 			</li>,
 			<li className = "nav-item" key= {2}>
 				<a className = "nav-link" href= "#" onClick= {() => this.handleSignout()}> Sign Out </a>
