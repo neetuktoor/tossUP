@@ -85,7 +85,7 @@ export function editProfile(updated){
 	return function(dispatch){
 		//find user id
 		const userUid = Firebase.auth().currentUser.uid;
-		
+
 		Firebase.database().ref('users/' + userUid).update({
 			id: userUid,
 			username: updated.displayname,
@@ -159,44 +159,51 @@ export function createBet(bets){
 			betAddedNotif(betData);
 
 		});
-		
-  	}
-}
 
-//function to send notifications to user just added to new bet 
+    Firebase.database().ref('/users/' + inviter + '/bets/' + key).update({
+        bets: key
+    });
+    }
+    // .then(() => {
+    //   dispatch(fetchBetInfo());
+    // });
+  }
+
+//function to send notifications to user just added to new bet
 export function betAddedNotif(betadded){
 
-	//find the unique id of the bet just added 
+	//find the unique id of the bet just added
 	var betID = betadded.id;
 	var inviter = betadded.inviter;
 	console.log("Bet unique:", betID);
 
-	//find the unique id of the user email added to bet 
+	//find the unique id of the user email added to bet
 	Firebase.database().ref().child('users').orderByChild('email').equalTo(betadded.addUser).on('value', function(snapshot){
-		
+
 		var keys = Object.keys(snapshot.val());
 		console.log(keys);
 		//this the user unique id
 		var userID = keys[0];
 
-		//ref notifications/useruniqueid and set to a uniqueid just added 
+		//ref notifications/useruniqueid and set to a uniqueid just added
 		Firebase.database().ref('/notifications/' + userID + '/betsAddedTo/'+ betID).update({
 			bet: betID,
 			inviter: inviter
-		})
+		});
 
 	});
 }
 
 //function to get all the notifications for that user to the database
 export function fetchInviteNotifs(){
-	
+
 	return function(dispatch){
 		//find the unique id of the current user
 		const user = Firebase.auth().currentUser.uid;
 
 		//search the database for notifications under that user unique id
 		Firebase.database().ref('/notifications/' + user).on('value', snapshot => {
+
 			
 			if (snapshot.val().betsAddedTo){
 
@@ -218,7 +225,7 @@ export function fetchInviteNotifs(){
 				var invitername = '';
 			
 
-				//for each of the bets find the firebase user and bet name
+				//for each of the bets find the firebase user and bet name to display
 				invites.map(function(lol){
 					Firebase.database().ref('/bets/' + lol.bet + '/title').on('value', snapshot =>{
 					
@@ -358,6 +365,7 @@ export function clearAccepted(notification){
 
 	Firebase.database().ref('notifications').child(user).child('acceptedBets').child(notification.notif.betid).remove();
 }
+<<<<<<< HEAD
 
 //function to store into the firebase that someone has accepted notification
 export function acceptedNotif(data){

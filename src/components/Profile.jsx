@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 class Profile extends React.Component {
 
-	//get user information to display on the page 
+	//get user information to display on the page
 	componentWillMount() {
 		this.props.fetchUserInfo();
 	}
@@ -25,7 +25,7 @@ class Profile extends React.Component {
 					<img className = "profilepic" src = { this.props.Pic } />
 					<div > { this.props.Name } </div>
 					<div > Email: { this.props.Email } </div>
-					<Link to = "/editprofile"><button className = "btn btn-primary btn-lg"> Edit Profile</button></Link> 
+					<Link to = "/editprofile"><button className = "btn btn-primary btn-lg"> Edit Profile</button></Link>
 				</div>
 			</div>
 		);
