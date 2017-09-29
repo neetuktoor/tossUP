@@ -21,34 +21,34 @@ class NotifList extends React.Component {
 		this.props.actions.fetchInviteNotifs();
 		this.props.actions.fetchAcceptedNotifs();
 		this.props.actions.fetchDeclinedNotifs();
-
-		// this.invited = this.invited.bind(this);
-		
+		this.invited = this.invited.bind(this);
 	}
-	
+
 	componentWillReceiveProps(nextProps) {
 
 		if (nextProps.notifInvited){
-			
+
 			this.setState({invitedfetched: true});
-		} 
+		}
 		if (nextProps.notifAccepted){
-			
+
 			this.setState({acceptedfetched: true});
-		} 
+
+		}
+ 
 		if (nextProps.notifDeclined){
 
 			this.setState({declinedfetched: true});
 		}	
 
 	}
-	
+
 	invited (){
 		
 		var arr = this.props.notifInvited.map((notif) => {
-		
+
 		return <NotifInvite key = { notif.bet }
-							notif = { notif } 
+							notif = { notif }
 							AcceptInvite = { () => { this.props.actions.acceptInvite({notif}) } }
 							DeclineInvite = { () => { this.props.actions.declineInvite( {notif} ) } }
 				/>
@@ -82,13 +82,15 @@ class NotifList extends React.Component {
 
 
 	render(){
+
 		
 		if (this.state.invitedfetched === false || this.state.acceptedfetched === false || this.state.declinedfetched === false){
+
 			return <img src = '../style/images/loading.jpg'/>
 		}
 
 		return (
-			<div className = "notif-list"> 
+			<div className = "notif-list">
 				<h2 className = "text-center" > Notifications </h2>
 				{ this.invited() }
 

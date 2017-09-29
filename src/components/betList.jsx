@@ -19,7 +19,7 @@ class betList extends React.Component{
   }
 
   componentWillReceiveProps(nextProps) {
-    
+
     if (nextProps.currentBet){
       this.setState({fetched: true});
     }
@@ -43,12 +43,11 @@ class betList extends React.Component{
         return <img src = '../style/images/loading.jpg'/>
       }
 
-      return (
-        <div className = "bet-list">
+      return <div className = "bet-list">
           <h2 className = "bet-text"> Current Bets </h2>
           { this.currentBets() }
         </div>
-      );
+      
   }
 }
 
