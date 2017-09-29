@@ -1,23 +1,28 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as Actions from '../actions';
-import { BrowserRouter, Redirect } from 'react-router-dom';
 
 class betItem extends React.Component {
   constructor(props){
     super(props);
-    
+    console.log("is it in here");
+  }
+
+  renderCurrentBets = () => {
+
+    if ( this.props.bet.title === ''){
+      return <div> You dont seem to like gambling. Make a bet if you do! </div>
+    }
+
+    return <div>
+        <h2> { this.props.bets.title } </h2>
+        <h3>  {this.props.bets.p1} vs. {this.props.bets.p2}</h3>
+        <div className = 'p1'> { this.props.bets.p1pic } </div> <div className = 'p2'> { this.props.bet.p2pic } </div>
+        Prize: { this.props.bets.prize }
+      </div>
   }
 
   render(){
-    return(
-      <div>
-        <h2> { this.props.bet.bet } </h2>
-        <h3>{this.props.bet.participant1} vs. {this.props.bet.participant2}</h3>
-        Prize: { this.props.bet.prize }
-      </div>
-    );
+    console.log("what about here");
+    return <div>{ this.renderCurrentBets() }</div>
   }
 }
 
