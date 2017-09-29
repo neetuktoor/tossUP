@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 import { BrowserRouter, Redirect } from 'react-router-dom';
-import { betItem } from './betItem'
+import { betItem } from './betItem';
 
 class betList extends React.Component{
   constructor(props){
@@ -15,19 +15,21 @@ class betList extends React.Component{
   this.props.actions.fetchBetInfo();
 
 
-  this.currentBets = this.currentBets.bind(this);
-
   }
 
-  componentDidMount(){
-    this.setState({fetched: true})
+  componentWillReceiveProps(nextProps) {
+
+    if (nextProps.currentBet){
+      this.setState({fetched: true});
+    }
+
   }
 
   currentBets() {
     var betItem = this.props.currentBet.map((bet) => {
 
       return <betItem
-                key = {bet.id}
+                key = {bet.bet}
                 bets = { bet }
 
               />
@@ -37,7 +39,7 @@ class betList extends React.Component{
   }
 
   render(){
-      if (!this.state.fetched){
+      if (this.state.fetched === false){
         return <img src = '../style/images/loading.jpg'/>
       }
 

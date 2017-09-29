@@ -9,6 +9,8 @@ export const USER_ERROR = 'USER_ERROR';
 export const CREATE_BET = 'CREATE_BET';
 export const ADD_TO_USER = 'ADD_TO_USER';
 export const FETCH_INVITE_NOTIFICATIONS = 'FETCH_INVITE_NOTIFICATIONS';
+export const FETCH_ACCEPTED_NOTIFICATIONS = 'FETCH_ACCEPTED_NOTIFICATIONS';
+export const FETCH_DECLINED_NOTIFICATIONS = 'FETCH_DECLINED_NOTIFICATIONS';
 export const FETCH_BETS = 'FETCH_BETS';
 
 //holds the shit to hold access key for firebase
@@ -160,12 +162,10 @@ export function createBet(bets){
 		});
 
     Firebase.database().ref('/users/' + inviter + '/bets/' + key).update({
+
         bets: key,
         inviter: inviter
 
-      }).then(() => {
-
-          //fetch bets to render on current bets page
       })
 
     };
@@ -173,46 +173,95 @@ export function createBet(bets){
 
 //function to fetch all the bets for that user in the database
 export function fetchBetInfo(){
-
   return function(dispatch){
-
     //find unique id of the current user
     var currentUser = Firebase.auth().currentUser.uid;
-
     //search the database for bets under that unique id
     Firebase.database().ref('/users/' + currentUser).on('value', snapshot => {
+        //if doesn’t exist, send back data with empty strings
+        if (snapshot.val() === null) { dispatch({
+            type: FETCH_BETS,
+            payload: [{bet: '', prize: '', participant1: '', participant2: ''}]
+            })
+        }
+        if (snapshot.val() !== null && snapshot.val().bets !== undefined){
+           //capture the bets in an array
+          var betArray = Object.keys(snapshot.val().bets);
+          // console.log(“bets” , snapshot.val().bets[betArray[1]]);
+          var currentBets = [];
+          //make an array of objects containing current user and bet id
+          betArray.map(function(wager){
 
-      //capture the bets in an array
-      var betArray = Object.keys(snapshot.val().bets);
-      // console.log("bets" , snapshot.val().bets[betArray[1]]);
+            currentBets.push({bet: snapshot.val().bets[wager].bets, user: snapshot.val().username});
+          });
+          //for each of the bets, find bet name, added user & prize
+          var info = [];
+          currentBets.map(function(infos){
+
+            Firebase.database().ref('/bets/' + infos.bet ).on('value' , snap => {
+
+                var hello =  snap.val().inviter;
+                var bett = snap.val().title;
+                var prizee = snap.val().prize;
+                var p2 = snap.val().addUser;
+                var p1 = snap.val().inviter;
+                if (currentUser === hello){
+                    info.push( {
+                        bet: bett,
+                        prize: prizee,
+                        participant1: infos.user,
+                        participant2: p2
+                    });
+                }
+
+                else{
+                    info.push({
+                        bet: bett,
+                        prize: prizee,
+                        participant1: infos.user,
+                        participant2: p1
+                    });
+                    }
+
+             });
+
+           });
+
+           //MIKE THIS IS WHERE THE CODE BREAKS AND DOESNT TAKE THE FUNCTION BELOW
+          //for each bet detail of variable info, find the username of participant2
+          var betInfo = [];
+
+          info.map(function(data){
+            console.log("data", data);
+            Firebase.database().ref('/users/' + data.participant2 + '/username').on('value', snapshot =>{
 
 
-      var currentBets = [];
+                betInfo.push({
+                    bet: data.bet,
+                    prize: data.prize,
+                    participant1: data.participant1,
+                    participant2: snapshot.val()
+                });
+            });
+          })
+          dispatch({
+            type: FETCH_BETS,
+            payload: betInfo
+          })
+         }
+         //sending the bets for that user to reducers
+         else {
+            dispatch({
+                    type: FETCH_BETS,
+                    payload: [{bet: '', prize: '', participant1: '', participant2: ''}]
+            });
+        }
+      });
 
-      //make an array of objects containing current user and bet id
-      betArray.forEach(function(wager){
-        currentBets.push({bet: snapshot.val().bets[wager].bets, user: snapshot.val().bets[wager].inviter});
-      })
-
-      //for each of the bets, find bet name, added user & prize
-      currentBets.map(function(info){
-        Firebase.database().ref('/bets/' + info.wager + '/title').on('value', snapshot => {
-
-        })
-      })
-
-      //sending the bets for that user to reducers
-      dispatch({
-				type: FETCH_BETS,
-				payload: currentBets
-        // payload: snapshot.val()
-			});
-		});
-
-	}
+    }
 }
 
-//function to send notifications to user just added to new bet
+//function to store notifications to user just added to new bet in firebase
 export function betAddedNotif(betadded){
 
 	//find the unique id of the bet just added
@@ -248,7 +297,14 @@ export function fetchInviteNotifs(){
 		Firebase.database().ref('/notifications/' + user).on('value', snapshot => {
 
 
-			if (snapshot.val().betsAddedTo){
+			//if doesn't exist, send back data with empty strings
+			if (snapshot.val() === null) { dispatch({
+				type: FETCH_INVITE_NOTIFICATIONS,
+				payload: [{bet: '', invitername: '', betid: '', inviterid: ''}]
+				})
+			}
+
+			if (snapshot.val() !== null && snapshot.val().betsAddedTo !== undefined){
 
 				var invitearr = Object.keys(snapshot.val().betsAddedTo);
 			}
@@ -278,26 +334,27 @@ export function fetchInviteNotifs(){
 						invitername = snap.val();
 
 						names.push({bet: betname, inviter: invitername, betid: lol.bet, inviterid: lol.inviter});
-						console.log("names", names);
-					});
 
 					});
 
-
-					//sending the notifications for that user to reducers
-					dispatch({
-						type: FETCH_INVITE_NOTIFICATIONS,
-						payload: names
 					});
+
+				});
+				//sending the notifications for that user to reducers
+				dispatch({
+					type: FETCH_INVITE_NOTIFICATIONS,
+					payload: names
+				});
+			}
+			else{
+
+
+				dispatch({
+					type: FETCH_INVITE_NOTIFICATIONS,
+					payload: [{bet: '', invitername: '', betid: '', inviterid: ''}]
 				});
 			}
 
-			//if doesn't exist, send back data with empty strings
-			else { dispatch({
-				type: FETCH_INVITE_NOTIFICATIONS,
-				payload: [{bet: '', invitername: '', betid: '', inviterid: ''}]
-				})
-			}
 		});
 
 		}
@@ -313,7 +370,15 @@ export function fetchAcceptedNotifs(){
 		//search the database for notifications under that user unique id
 		Firebase.database().ref('/notifications/' + user).on('value', snapshot => {
 
-			if (snapshot.val().acceptedBets){
+			//if doesn't exist, send back data with empty strings
+			if (snapshot.val() === null) { dispatch({
+				type: FETCH_ACCEPTED_NOTIFICATIONS,
+				payload: [{bet: '', invitedname: '', betid: '', invitedid: ''}]
+				})
+			}
+
+			//if there are accepted bets in the notifications table
+			if (snapshot.val() !== null && snapshot.val().acceptedBets !== undefined){
 
 				var acceptarr = Object.keys(snapshot.val().acceptedBets);
 			}
@@ -321,7 +386,8 @@ export function fetchAcceptedNotifs(){
 			if (snapshot.val() && acceptarr){
 
 				var accepted = [];
-				//make an array of objects containing the inviter and bet id
+
+				//make an array of objects containing the inviter and bet id for every accepted notification
 				acceptarr.forEach(function(bet){
 
 					accepted.push({bet: snapshot.val().acceptedBets[bet].bet, invited: snapshot.val().acceptedBets[bet].invited});
@@ -348,19 +414,94 @@ export function fetchAcceptedNotifs(){
 
 					});
 
+				});
+				//sending the notifications for that user to reducers
+					dispatch({
+						type: FETCH_ACCEPTED_NOTIFICATIONS,
+						payload: names
+					});
+			}
+
+			else{
+
+				dispatch({
+					type: FETCH_ACCEPTED_NOTIFICATIONS,
+					payload: [{bet: '', invitedname: '', betid: '', invitedid: ''}]
+				})
+			}
+
+
+		});
+
+		}
+	}
+
+//fetching declined notification
+export function fetchDeclinedNotifs(){
+
+	return function(dispatch){
+		//find the unique id of the current user
+		const user = Firebase.auth().currentUser.uid;
+
+		//search the database for notifications under that user unique id
+		Firebase.database().ref('/notifications/' + user).on('value', snapshot => {
+
+			//if doesn't exist, send back data with empty strings
+			if (snapshot.val() === null) { dispatch({
+				type: FETCH_DECLINED_NOTIFICATIONS,
+				payload: [{bet: '', invitedname: '', betid: '', invitedid: ''}]
+				})
+			}
+
+			if (snapshot.val() !== null && snapshot.val().declinedBets !== undefined){
+
+				var declinedarr = Object.keys(snapshot.val().declinedBets);
+			}
+
+			if (snapshot.val() && declinedarr){
+
+				var declined = [];
+				//make an array of objects containing the inviter and bet id
+				declinedarr.forEach(function(bet){
+
+					declined.push({bet: snapshot.val().declinedBets[bet].bet, invited: snapshot.val().declinedBets[bet].invited});
+				})
+
+
+				var names = [];
+				var betname = '';
+				var invitedname = '';
+
+
+				//for each of the bets find the firebase user and bet name
+				declined.map(function(lol){
+					Firebase.database().ref('/bets/' + lol.bet + '/title').on('value', snapshot =>{
+
+						betname = snapshot.val();
+
+						Firebase.database().ref('/users/' + lol.invited + '/username').on('value', snap => {
+						invitedname = snap.val();
+
+						names.push({bet: betname, invited: invitedname, betid: lol.bet, invitedid: lol.invited});
+						console.log("declinednames", names);
+					});
+
+					});
+
 
 					//sending the notifications for that user to reducers
 					dispatch({
-						type: FETCH_ACCEPTED_NOTIFICATIONS,
+						type: FETCH_DECLINED_NOTIFICATIONS,
 						payload: names
 					});
 				});
 			}
 
-			//if doesn't exist, send back data with empty strings
-			else { dispatch({
-				type: FETCH_ACCEPTED_NOTIFICATIONS,
-				payload: [{bet: '', invitedname: '', betid: '', invitedid: ''}]
+			else{
+
+				dispatch({
+					type: FETCH_DECLINED_NOTIFICATIONS,
+					payload: [{bet: '', invitedname: '', betid: '', invitedid: ''}]
 				})
 			}
 		});
@@ -408,7 +549,14 @@ export function clearAccepted(notification){
 
 	Firebase.database().ref('notifications').child(user).child('acceptedBets').child(notification.notif.betid).remove();
 }
-<<<<<<< HEAD
+
+//clearing the notification for declined invitations
+export function clearDeclined(notification){
+	const user = Firebase.auth().currentUser.uid;
+
+	Firebase.database().ref('notifications').child(user).child('declinedBets').child(notification.notif.betid).remove();
+}
+
 
 //function to store into the firebase that someone has accepted notification
 export function acceptedNotif(data){
