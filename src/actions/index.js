@@ -297,7 +297,11 @@ export function fetchInviteNotifs(){
 		Firebase.database().ref('/notifications/' + user).on('value', snapshot => {
 
 
+<<<<<<< HEAD
 			//if doesn't exist, send back data with empty strings
+=======
+			//if doesn't exist, send back data with empty strings
+>>>>>>> 19bdba714e4442daf19d04d416379da49f3354c4
 			if (snapshot.val() === null) { dispatch({
 				type: FETCH_INVITE_NOTIFICATIONS,
 				payload: [{bet: '', invitername: '', betid: '', inviterid: ''}]
@@ -334,11 +338,19 @@ export function fetchInviteNotifs(){
 						invitername = snap.val();
 
 						names.push({bet: betname, inviter: invitername, betid: lol.bet, inviterid: lol.inviter});
+<<<<<<< HEAD
 
 					});
 
 					});
 
+=======
+
+					});
+
+					});
+
+>>>>>>> 19bdba714e4442daf19d04d416379da49f3354c4
 				});
 				//sending the notifications for that user to reducers
 				dispatch({
@@ -370,12 +382,22 @@ export function fetchAcceptedNotifs(){
 		//search the database for notifications under that user unique id
 		Firebase.database().ref('/notifications/' + user).on('value', snapshot => {
 
+<<<<<<< HEAD
 			//if doesn't exist, send back data with empty strings
+=======
+			//if doesn't exist, send back data with empty strings
+>>>>>>> 19bdba714e4442daf19d04d416379da49f3354c4
 			if (snapshot.val() === null) { dispatch({
 				type: FETCH_ACCEPTED_NOTIFICATIONS,
 				payload: [{bet: '', invitedname: '', betid: '', invitedid: ''}]
 				})
 			}
+<<<<<<< HEAD
+
+			//if there are accepted bets in the notifications table
+			if (snapshot.val() !== null && snapshot.val().acceptedBets !== undefined){
+=======
+>>>>>>> 19bdba714e4442daf19d04d416379da49f3354c4
 
 			//if there are accepted bets in the notifications table
 			if (snapshot.val() !== null && snapshot.val().acceptedBets !== undefined){
@@ -416,6 +438,8 @@ export function fetchAcceptedNotifs(){
 
 				});
 				//sending the notifications for that user to reducers
+<<<<<<< HEAD
+=======
 					dispatch({
 						type: FETCH_ACCEPTED_NOTIFICATIONS,
 						payload: names
@@ -450,6 +474,86 @@ export function fetchDeclinedNotifs(){
 			if (snapshot.val() === null) { dispatch({
 				type: FETCH_DECLINED_NOTIFICATIONS,
 				payload: [{bet: '', invitedname: '', betid: '', invitedid: ''}]
+				})
+			}
+
+			if (snapshot.val() !== null && snapshot.val().declinedBets !== undefined){
+
+				var declinedarr = Object.keys(snapshot.val().declinedBets);
+			}
+
+			if (snapshot.val() && declinedarr){
+
+				var declined = [];
+				//make an array of objects containing the inviter and bet id
+				declinedarr.forEach(function(bet){
+
+					declined.push({bet: snapshot.val().declinedBets[bet].bet, invited: snapshot.val().declinedBets[bet].invited});
+				})
+
+
+				var names = [];
+				var betname = '';
+				var invitedname = '';
+
+
+				//for each of the bets find the firebase user and bet name
+				declined.map(function(lol){
+					Firebase.database().ref('/bets/' + lol.bet + '/title').on('value', snapshot =>{
+
+						betname = snapshot.val();
+
+						Firebase.database().ref('/users/' + lol.invited + '/username').on('value', snap => {
+						invitedname = snap.val();
+
+						names.push({bet: betname, invited: invitedname, betid: lol.bet, invitedid: lol.invited});
+						console.log("declinednames", names);
+					});
+
+					});
+
+
+					//sending the notifications for that user to reducers
+>>>>>>> 19bdba714e4442daf19d04d416379da49f3354c4
+					dispatch({
+						type: FETCH_DECLINED_NOTIFICATIONS,
+						payload: names
+					});
+			}
+
+			else{
+
+				dispatch({
+<<<<<<< HEAD
+					type: FETCH_ACCEPTED_NOTIFICATIONS,
+					payload: [{bet: '', invitedname: '', betid: '', invitedid: ''}]
+				})
+			}
+
+
+		});
+
+		}
+	}
+
+//fetching declined notification
+export function fetchDeclinedNotifs(){
+
+	return function(dispatch){
+		//find the unique id of the current user
+		const user = Firebase.auth().currentUser.uid;
+
+		//search the database for notifications under that user unique id
+		Firebase.database().ref('/notifications/' + user).on('value', snapshot => {
+
+			//if doesn't exist, send back data with empty strings
+			if (snapshot.val() === null) { dispatch({
+				type: FETCH_DECLINED_NOTIFICATIONS,
+				payload: [{bet: '', invitedname: '', betid: '', invitedid: ''}]
+=======
+					type: FETCH_DECLINED_NOTIFICATIONS,
+					payload: [{bet: '', invitedname: '', betid: '', invitedid: ''}]
+>>>>>>> 19bdba714e4442daf19d04d416379da49f3354c4
 				})
 			}
 

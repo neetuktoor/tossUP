@@ -18,7 +18,11 @@ class betList extends React.Component{
   }
 
   componentWillReceiveProps(nextProps) {
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 19bdba714e4442daf19d04d416379da49f3354c4
     if (nextProps.currentBet){
       this.setState({fetched: true});
     }

@@ -7,7 +7,7 @@ import { reducer as FormReducer } from 'redux-form';
 import AuthReducer from './auth';
 import UserReducer from './user';
 import NotifsReducer from './notifs';
-import BetsReducer from './bets'
+import BetsReducer from './bets';
 
 //combines all the reducers to export
 const rootReducer = combineReducers ({
@@ -16,7 +16,7 @@ const rootReducer = combineReducers ({
 	auth: AuthReducer,
 	user: UserReducer,
 	notifs: NotifsReducer,
-  bets: BetsReducer
+  	bets: BetsReducer
 });
 
 export default rootReducer;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class NotifAccepted extends React.Component {
+class NotifDeclined extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -13,14 +13,14 @@ class NotifAccepted extends React.Component {
 		this.props.ClearNotification(this.props.notif);
 	}
 
-	renderNotifAccepted = () => {
+	renderNotifDeclined = () => {
 		if ( this.props.notif.bet === ''){
 			return <div> </div>
 		}
 
 		else if (this.state.responded === false){
 			return <div> 
-				<i>{ this.props.notif.invited }</i> accepted your bet to <i>{ this.props.notif.bet }</i>  
+				<i>{ this.props.notif.invited }</i> declined your bet to <i>{ this.props.notif.bet }</i>  
 				<button onClick = { () => { this.clear() } }  > Clear Notification </button>
 				</div>
 			
@@ -29,8 +29,8 @@ class NotifAccepted extends React.Component {
 	}
 
 	render(){
-		return <div>{ this.renderNotifAccepted() }</div>
+		return <div>{ this.renderNotifDeclined() }</div>
 	}
 }
 
-export default NotifAccepted;
+export default NotifDeclined;
