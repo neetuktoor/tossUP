@@ -7,15 +7,9 @@ import { BrowserRouter, Redirect } from 'react-router-dom';
 class betItem extends React.Component {
   constructor(props){
     super(props);
-<<<<<<< HEAD
 
   }
 
-=======
-    
-  }
-
->>>>>>> 19bdba714e4442daf19d04d416379da49f3354c4
   render(){
     return(
       <div>

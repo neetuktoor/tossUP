@@ -1,4 +1,4 @@
-import Firebase from 'firebase’;
+import Firebase from 'firebase';
 export const SIGN_IN_USER = 'SIGN_IN_USER';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 export const AUTH_USER = 'AUTH_USER';
@@ -201,7 +201,7 @@ export function fetchBetInfo(){
 
           info.map(function(data){
             console.log("data", data);
-            Firebase.database().ref('/users/’ + data.participant2 + '/username').on('value’, snapshot =>{
+            Firebase.database().ref('/users/' + data.participant2 + '/username').on('value', snapshot =>{
 
 
                 betInfo.push({
@@ -421,7 +421,7 @@ export function declineInvite(notification){
         //find the unique id of the current user
         const user = Firebase.auth().currentUser.uid;
         //remove bet from betsAddedTo
-        Firebase.database().ref('notifications’).child(user).child('betsAddedTo’).child(notification.notif.betid).remove()
+        Firebase.database().ref('notifications').child(user).child('betsAddedTo').child(notification.notif.betid).remove()
             .then(() => {
                 dispatch(declinedNotif(notification));
             })
@@ -470,3 +470,4 @@ export function declinedNotif(data){
     Firebase.database().ref('/bets/' + data.notif.betid).update({
         addUser: "Add a user"
     })
+}
