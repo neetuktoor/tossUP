@@ -53,7 +53,7 @@ class App extends React.Component {
                         <PrivateRoute authenticated = { this.props.authenticated } path = "/bets" component= { betList } />
                         <PrivateRoute authenticated = {this.props.authenticated } path = "/profile" component = { Profile } />
                         <PrivateRoute authenticated = { this.props.authenticated } path = "/editprofile" component = { EditProfile } />
-                        <PrivateRoute authenticated={this.props.authenticated }  path="/" component= { Home } />
+                        <PrivateRoute authenticated={this.props.authenticated }  path="/" component= { betList } />
 
                     </Switch>
                     <Footer />

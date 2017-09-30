@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 import { BrowserRouter, Redirect } from 'react-router-dom';
+
 import betItem from './betItem';
 
-class betList extends React.Component{
+class betList extends React.Component {
   constructor(props){
     super(props);
 
@@ -14,7 +15,6 @@ class betList extends React.Component{
     }
 
   this.props.actions.fetchBetInfo();
-
 
   }
 
@@ -29,12 +29,13 @@ class betList extends React.Component{
   currentBets() {
     var bItem = this.props.currentBet.map((bet) => {
       console.log("bet", bet);
-      return <betItem 
-                key = { bet.title }
-                bets = { bet }
+      return <betItem key = { bet.title }
+                      bets = { bet }
               />
 
-  });
+    });
+    console.log("bItem", bItem);
+    
     return bItem;
   }
 
@@ -43,10 +44,13 @@ class betList extends React.Component{
         return <img src = '../style/images/loading.jpg'/>
       }
 
-      return <div className = "bet-list">
-          <h2 className = "bet-text"> Current Bets </h2>
+      return(
+       <div>
+        <h2> Current Bets </h2>
           { this.currentBets() }
+
         </div>
+      );
       
   }
 }

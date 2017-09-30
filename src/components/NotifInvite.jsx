@@ -6,7 +6,6 @@ class NotifInvite extends React.Component {
 		this.state = {
 			responded: false
 		}
-		
 
 	}
 
