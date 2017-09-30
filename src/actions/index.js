@@ -166,6 +166,7 @@ export function fetchBetInfo(){
           });
           //for each of the bets, find bet name, added user & prize
           var info = [];
+          console.log("info", info)
           currentBets.map(function(infos){
 
             Firebase.database().ref('/bets/' + infos.bet ).on('value', snap => {
@@ -196,6 +197,7 @@ export function fetchBetInfo(){
              });
 
            });
+
           //for each bet detail of variable info, find the username of participant2
           var betInfo = [];
 

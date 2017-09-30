@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
+
 class Footer extends React.Component {
 
 	renderAuthLinks(){
@@ -10,9 +11,9 @@ class Footer extends React.Component {
 		if (!this.props.authenticated){
 			return(
 				<div>
-  					<Link className="navbar-brand" to = "/login"><img src = "../style/images/homepage.jpg"/></Link>
-  					<Link className="navbar-brand" to = "/login"><img src = "../style/images/notification.png"/></Link>
-  					<Link className="navbar-brand" to = "/login"><img src = "../style/images/profile.jpg"/></Link>
+  					<Link className="footerbrand2" to = "/login"><img src = "../style/images/homepage.jpg"/></Link>
+  					<Link className="footerbrand2" to = "/login"><img src = "../style/images/notification.png"/></Link>
+  					<Link className="footerbrand2" to = "/login"><img src = "../style/images/profile.jpg"/></Link>
 				</div>
 				);
 		}
@@ -21,10 +22,10 @@ class Footer extends React.Component {
 		else {
 			return(
 				<div>
-  					<Link className="navbar-brand" to = "/login"><img src = "../style/images/homepage.jpg"/></Link>
-  					<Link className="navbar-brand" to = "/notifications"><img src = "../style/images/notification.png"/></Link>
-  					<Link className="navbar-brand" to = "/profile"><img src = "../style/images/profile.jpg"/></Link>
-            <Link className="navbar-brand" to = "/createbet"><img src = "../style/images/add.png"/></Link>
+  					<Link className="footerbrand2" to = "/login"><img src = "../style/images/homepage.jpg"/></Link>
+  					<Link className="footerbrand2" to = "/notifications"><img src = "../style/images/notification.png"/></Link>
+  					<Link className="footerbrand2" to = "/profile"><img src = "../style/images/profile.jpg"/></Link>
+            <Link className="footerbrand2" to = "/createbet"><img src = "../style/images/add.png"/></Link>
 				</div>
 				);
 		}
@@ -32,7 +33,7 @@ class Footer extends React.Component {
 
 	render(){
 		return (
-			<nav className="navbar fixed-bottom navbar-light bg-faded">
+			<nav className="footbar fixed-bottom footbar-light bg-faded">
 				{ this.renderAuthLinks() }
 			</nav>
 			);
