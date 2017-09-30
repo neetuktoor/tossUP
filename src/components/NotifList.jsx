@@ -21,7 +21,15 @@ class NotifList extends React.Component {
 		this.props.actions.fetchInviteNotifs();
 		this.props.actions.fetchAcceptedNotifs();
 		this.props.actions.fetchDeclinedNotifs();
+<<<<<<< HEAD
+
+
 		this.invited = this.invited.bind(this);
+
+
+=======
+		this.invited = this.invited.bind(this);
+>>>>>>> eaef2284b885ae028ae9db49014cbb0dfc8c84f1
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -35,16 +43,24 @@ class NotifList extends React.Component {
 			this.setState({acceptedfetched: true});
 
 		}
+<<<<<<< HEAD
+		if (nextProps.notifDeclined){
+
+			this.setState({declinedfetched: true});
+		}
+
+=======
  
 		if (nextProps.notifDeclined){
 
 			this.setState({declinedfetched: true});
 		}	
+>>>>>>> eaef2284b885ae028ae9db49014cbb0dfc8c84f1
 
 	}
 
 	invited (){
-		
+
 		var arr = this.props.notifInvited.map((notif) => {
 
 		return <NotifInvite key = { notif.bet }
@@ -83,7 +99,10 @@ class NotifList extends React.Component {
 
 	render(){
 
+<<<<<<< HEAD
+=======
 		
+>>>>>>> eaef2284b885ae028ae9db49014cbb0dfc8c84f1
 		if (this.state.invitedfetched === false || this.state.acceptedfetched === false || this.state.declinedfetched === false){
 
 			return <img src = '../style/images/loading.jpg'/>
@@ -108,7 +127,11 @@ function mapStateToProps(state){
 		notifInvited: state.notifs.invited,
 		notifAccepted: state.notifs.accepted,
 		notifDeclined: state.notifs.declined
+<<<<<<< HEAD
+	};
+=======
 	};	
+>>>>>>> eaef2284b885ae028ae9db49014cbb0dfc8c84f1
 }
 
 function mapDispatchToProps(dispatch){

@@ -8,7 +8,6 @@ class betItem extends React.Component {
     }
   }
 
-  
 
   renderCurrentBets = () => {
     if ( this.props.bets.title === ''){
@@ -23,6 +22,7 @@ class betItem extends React.Component {
     }
     return <div> </div>
   }
+
 
   render(){
     return <div>{ this.renderCurrentBets() }</div>

@@ -14,10 +14,10 @@ class Header extends React.Component {
 		if (this.props.authenticated){
 			return [
 			<li className = "nav-item" key = {1}>
-				<Link className = "nav-link" to= "/bets"> Current Bets </Link>
+				<Link className = "nav-link" to= "/bets"> <h5> Current Bets </h5> </Link>
 			</li>,
 			<li className = "nav-item" key= {2}>
-				<a className = "nav-link" href= "#" onClick= {() => this.handleSignout()}> Sign Out </a>
+				<a className = "nav-link" href= "#" onClick= {() => this.handleSignout()}> <h5> Sign Out </h5> </a>
 			</li>
 			]
 		}
@@ -25,11 +25,11 @@ class Header extends React.Component {
 		else {
 			return [
 				<li className = "nav-item" key = {1}>
-					<Link className = "nav-link" to = "/login"> Log in </Link>
+					<Link className = "nav-link" to = "/login"> <h5> Log in </h5> </Link>
 				</li>,
 
 				<li className = "nav-item" key= {2}>
-					<Link className = "nav-link" to = "/signup"> Sign Up </Link>
+					<Link className = "nav-link" to = "/signup"> <h5> Sign Up </h5> </Link>
 				</li>
 			]
 		}
@@ -40,7 +40,7 @@ class Header extends React.Component {
 			<nav className = "navbar navbar-default">
 				<div className = "container-fluid">
 					<div className = "navbar-header">
-						<Link className = "navbar-brand" to = "/"> Toss Up </Link>
+						<Link className = "navbar-brand" to = "/">  Toss Up  </Link>
 					</div>
 
 					<ul className = "nav navbar-nav navbar-right">
