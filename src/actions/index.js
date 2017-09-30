@@ -119,31 +119,83 @@ export function fetchUserInfo(){
     }
 }
 export function createBet(bets){
-    return function(dispatch){
-        var inviter = Firebase.auth().currentUser.uid;
-        var betRef = Firebase.database().ref('/bets/').push();
-        var key = betRef.key;
-        var betData = {
-            id: key,
-            title: bets.title,
-            prize: bets.prize,
-            date: bets.date,
-            addUser: bets.addUser,
-            inviter: inviter
-        };
-        console.log("key just made", key);
-        betRef.update(betData, function(error){
-            console.log(betData);
-            betAddedNotif(betData);
-        });
+
+	return function(dispatch){
+		var inviter = Firebase.auth().currentUser.uid;
+
+		var betRef = Firebase.database().ref('/bets/').push();
+		var key = betRef.key;
+		var betData = {
+			id: key,
+			title: bets.title,
+			prize: bets.prize,
+			date: bets.date,
+			addUser: bets.addUser,
+			inviter: inviter
+		};
+
+		console.log("key just made", key);
+
+		betRef.update(betData, function(error){
+			console.log(betData);
+			betAddedNotif(betData);
+		});
+	
+	Firebase.database().ref('/users/' + inviter).on('value', snapshot => {
+		var profile = snapshot.val().profile_picture;
+		var username = snapshot.val().username;
+
+		Firebase.database().ref('/bets/' + key).update({
+    	inviterpic: profile,
+        invitername : username,
+        inviteduser: '',
+        invitedpic: ''
+    });
+	});
+
     Firebase.database().ref('/users/' + inviter + '/bets/' + key).update({
         bets: key,
         inviter: inviter
-      })
+     });
+
     };
 }
+
+//function to store notifications to user just added to new bet in firebase
+export function betAddedNotif(betadded){
+
+	//find the unique id of the bet just added
+	var betID = betadded.id;
+	var inviter = betadded.inviter;
+	
+
+	//find the unique id of the user email added to bet
+	Firebase.database().ref().child('users').orderByChild('email').equalTo(betadded.addUser).on('value', function(snapshot){
+		console.log("bet added this", snapshot.val());
+		var keys = Object.keys(snapshot.val());
+		
+		//this the user unique id
+		var userID = keys[0];
+
+		//ref notifications/useruniqueid and set to a uniqueid just added
+		Firebase.database().ref('/notifications/' + userID + '/betsAddedTo/'+ betID).update({
+			bet: betID,
+			inviter: inviter,
+
+		});
+		
+		//update bets with the invited 
+		Firebase.database().ref('/bets/' + betID).update({
+			inviteduser: snapshot.val()[userID].username,
+			invitedpic: snapshot.val()[userID].profile_picture
+		});
+	});
+}
+
+
 //function to fetch all the bets for that user in the database
 export function fetchBetInfo(){
+<<<<<<< HEAD
   return function(dispatch){
     //find unique id of the current user
     var currentUser = Firebase.auth().currentUser.uid;
@@ -193,9 +245,50 @@ export function fetchBetInfo(){
                         participant2: p1
                     });
                     }
+=======
+return function(dispatch){
+	
+	//get all the bet ids from the current user in the database 
+	const currentuser = Firebase.auth().currentUser.uid;
+	var partialInfo = [];
+	Firebase.database().ref('/users/' + currentuser).on('value', snapshot => {
+		
+		//if bets in the users table is not null
+		if (snapshot.val().bets !== null){
+			
+			var allBetArr = Object.keys(snapshot.val().bets);
+>>>>>>> eaef2284b885ae028ae9db49014cbb0dfc8c84f1
 
-             });
+			//for each of the bets, return back current user username, profile pic, and betid, and inviter
+			partialInfo = allBetArr.map(function(bet){
+				
+				return {
+					betid: bet,
+					currentname: snapshot.val().username,
+					currentuserid: snapshot.val().id,
+					currentpic: snapshot.val().profile_picture,
+					inviterid: snapshot.val().bets[bet].inviter
+				}
+			})
+			dispatch(fetchFullInfo(partialInfo));
+		}
+		else{
+			
+			dispatch(
+				type: FETCH_BETS,
+				payload:[{
+					title: '', 
+					date: '',
+					prize: '',
+					p1: '',
+					p1pic: '',
+					p2: '',
+					p2pic: ''
+				}]
+			);
+		}
 
+<<<<<<< HEAD
            });
 
           //for each bet detail of variable info, find the username of participant2
@@ -204,51 +297,61 @@ export function fetchBetInfo(){
           info.map(function(data){
             console.log("data", data);
             Firebase.database().ref('/users/' + data.participant2 + '/username').on('value', snapshot =>{
-
-
-                betInfo.push({
-                    bet: data.bet,
-                    prize: data.prize,
-                    participant1: data.participant1,
-                    participant2: snapshot.val()
-                });
-            });
-          })
-          dispatch({
-            type: FETCH_BETS,
-            payload: betInfo
-          })
-         }
-         //sending the bets for that user to reducers
-         else {
-            dispatch({
-                    type: FETCH_BETS,
-                    payload: [{bet: '', prize: '', participant1: '', participant2: ''}]
-            });
-        }
-        });
-
-    }
+=======
+	})
+	}
+ 
 }
-//function to store notifications to user just added to new bet in firebase
-export function betAddedNotif(betadded){
-    //find the unique id of the bet just added
-    var betID = betadded.id;
-    var inviter = betadded.inviter;
-    console.log("Bet unique:", betID);
-    //find the unique id of the user email added to bet
-    Firebase.database().ref().child('users').orderByChild('email').equalTo(betadded.addUser).on('value', function(snapshot){
-        var keys = Object.keys(snapshot.val());
-        console.log(keys);
-        //this the user unique id
-        var userID = keys[0];
-        //ref notifications/useruniqueid and set to a uniqueid just added
-        Firebase.database().ref('/notifications/' + userID + '/betsAddedTo/'+ betID).update({
-            bet: betID,
-            inviter: inviter
-        });
-    });
+
+export function fetchFullInfo(partialInfo){
+	return  function(dispatch){
+	console.log(partialInfo);
+	var fullInfo = [];
+	var databaseRef = Firebase.database().ref('bets').orderByChild("date");
+>>>>>>> eaef2284b885ae028ae9db49014cbb0dfc8c84f1
+
+	databaseRef.on('child_added', function(snapshot){
+
+		//for each child sent back, if the id the same as the bet id, push new info into fullInfo
+		partialInfo.forEach(function(data){
+			if (data.betid === snapshot.val().id){
+
+				if(data.currentuserid === snapshot.val().inviter){
+					fullInfo.push({
+						title: snapshot.val().title,
+						date: snapshot.val().date,
+						prize: snapshot.val().prize,
+						p1: data.currentname,
+						p1pic: data.currentpic,
+						p2: snapshot.val().inviteduser,
+						p2pic: snapshot.val().invitedpic
+					})
+				}
+				//he is the invited
+				else{
+					fullInfo.push({
+						title: snapshot.val().title,
+						date: snapshot.val().date,
+						prize: snapshot.val().prize,
+						p1: data.currentname,
+						p1pic: data.currentpic,
+						p2: snapshot.val().invitername,
+						p2pic: snapshot.val().inviterpic
+					})
+				}
+			}
+		});
+		//if info equals to partialInfo length, dispatch that shit 
+		if (fullInfo.length === partialInfo.length){
+			dispatch({
+				type: FETCH_BETS,
+				payload: fullInfo
+			})
+		}
+	})
 }
+}
+
 //function to get all the notifications for that user to the database
 export function fetchInviteNotifs(){
     return function(dispatch){
@@ -444,7 +547,7 @@ export function acceptInvite(notification){
 //clearing the notification for accepted invitations
 export function clearAccepted(notification){
     const user = Firebase.auth().currentUser.uid;
-    Firebase.database().ref('notifications').child(user).child('acceptedBets'``).child(notification.notif.betid).remove();
+    Firebase.database().ref('notifications').child(user).child('acceptedBets').child(notification.notif.betid).remove();
 }
 //clearing the notification for declined invitations
 export function clearDeclined(notification){
