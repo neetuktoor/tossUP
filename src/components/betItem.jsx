@@ -1,6 +1,6 @@
 import React from 'react';
 
-class betItem extends React.Component {
+class BetItem extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -15,12 +15,15 @@ class betItem extends React.Component {
     }
 
     else if (this.state.responded === false){
-      return <div> 
-        Hello
+      return <div className = "currentbets"> 
+        <h2> {this.props.bets.title } </h2>
+        <div className = "participants"> { this.props.bets.p1 } vs { this.props.bets.p2 } </div>
+        <div className = "profiles"> <img src = { this.props.bets.p1pic }></img> vs <img src = { this.props.bets.p2pic }></img> </div>
+        Prize : { this.props.bets. prize }
         </div>
       
     }
-    return <div> </div>
+    return <div>  </div>
   }
 
 
@@ -30,4 +33,4 @@ class betItem extends React.Component {
 }
   
 
-export default betItem;
+export default BetItem;

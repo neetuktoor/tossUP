@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 import { BrowserRouter, Redirect } from 'react-router-dom';
 
-import betItem from './betItem';
+import BetItem from './betItem';
 
 class betList extends React.Component {
   constructor(props){
@@ -29,7 +29,7 @@ class betList extends React.Component {
   currentBets() {
     var bItem = this.props.currentBet.map((bet) => {
       console.log("bet", bet);
-      return <betItem key = { bet.title }
+      return <BetItem key = { bet.title }
                       bets = { bet }
               />
 
@@ -47,6 +47,7 @@ class betList extends React.Component {
       return(
        <div>
         <h2> Current Bets </h2>
+
           { this.currentBets() }
 
         </div>
