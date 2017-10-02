@@ -24,8 +24,6 @@ class NotifList extends React.Component {
 
 		this.invited = this.invited.bind(this);
 
-
-
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -43,9 +41,8 @@ class NotifList extends React.Component {
 		if (nextProps.notifDeclined){
 
 			this.setState({declinedfetched: true});
+
 		}	
-
-
 	}
 
 	invited (){
@@ -87,6 +84,7 @@ class NotifList extends React.Component {
 
 
 	render(){
+
 
 		if (this.state.invitedfetched === false || this.state.acceptedfetched === false || this.state.declinedfetched === false){
 
