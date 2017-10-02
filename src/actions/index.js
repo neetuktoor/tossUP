@@ -140,7 +140,7 @@ export function createBet(bets){
 			console.log(betData);
 			betAddedNotif(betData);
 		});
-	
+
 	Firebase.database().ref('/users/' + inviter).on('value', snapshot => {
 		var profile = snapshot.val().profile_picture;
 		var username = snapshot.val().username;
@@ -167,13 +167,13 @@ export function betAddedNotif(betadded){
 	//find the unique id of the bet just added
 	var betID = betadded.id;
 	var inviter = betadded.inviter;
-	
+
 
 	//find the unique id of the user email added to bet
 	Firebase.database().ref().child('users').orderByChild('email').equalTo(betadded.addUser).on('value', function(snapshot){
 		console.log("bet added this", snapshot.val());
 		var keys = Object.keys(snapshot.val());
-		
+
 		//this the user unique id
 		var userID = keys[0];
 
@@ -183,8 +183,8 @@ export function betAddedNotif(betadded){
 			inviter: inviter,
 
 		});
-		
-		//update bets with the invited 
+
+		//update bets with the invited
 		Firebase.database().ref('/bets/' + betID).update({
 			inviteduser: snapshot.val()[userID].username,
 			invitedpic: snapshot.val()[userID].profile_picture
@@ -195,73 +195,21 @@ export function betAddedNotif(betadded){
 
 //function to fetch all the bets for that user in the database
 export function fetchBetInfo(){
-<<<<<<< HEAD
-  return function(dispatch){
-    //find unique id of the current user
-    var currentUser = Firebase.auth().currentUser.uid;
-    //search the database for bets under that unique id
-    Firebase.database().ref('/users/' + currentUser).on('value', snapshot => {
-        //if doesn’t exist, send back data with empty strings
-        if (snapshot.val() === null) { dispatch({
-            type: FETCH_BETS,
-            payload: [{bet: '', prize: '', participant1: '', participant2: ''}]
-            })
-        }
-        if (snapshot.val() !== null && snapshot.val().bets !== undefined){
-           //capture the bets in an array
-           var betArray = Object.keys(snapshot.val().bets);
-          // console.log(“bets” , snapshot.val().bets[betArray[1]]);
-          var currentBets = [];
-          //make an array of objects containing current user and bet id
-          betArray.map(function(wager){
-            currentBets.push({bet: snapshot.val().bets[wager].bets, user: snapshot.val().username});
-          });
-          //for each of the bets, find bet name, added user & prize
-          var info = [];
-          console.log("info", info)
-          currentBets.map(function(infos){
-
-            Firebase.database().ref('/bets/' + infos.bet ).on('value', snap => {
-
-                var hello =  snap.val().inviter;
-                var bett = snap.val().title;
-                var prizee = snap.val().prize;
-                var p2 = snap.val().addUser;
-                var p1 = snap.val().inviter;
-                if (currentUser === hello){
-                    info.push( {
-                        bet: bett,
-                        prize: prizee,
-                        participant1: infos.user,
-                        participant2: p2
-                    });
-                }
-
-                else{
-                    info.push({
-                        bet: bett,
-                        prize: prizee,
-                        participant1: infos.user,
-                        participant2: p1
-                    });
-                    }
-=======
 return function(dispatch){
-	
-	//get all the bet ids from the current user in the database 
+
+	//get all the bet ids from the current user in the database
 	const currentuser = Firebase.auth().currentUser.uid;
 	var partialInfo = [];
 	Firebase.database().ref('/users/' + currentuser).on('value', snapshot => {
-		
+
 		//if bets in the users table is not null
 		if (snapshot.val().bets !== null){
-			
+
 			var allBetArr = Object.keys(snapshot.val().bets);
->>>>>>> eaef2284b885ae028ae9db49014cbb0dfc8c84f1
 
 			//for each of the bets, return back current user username, profile pic, and betid, and inviter
 			partialInfo = allBetArr.map(function(bet){
-				
+
 				return {
 					betid: bet,
 					currentname: snapshot.val().username,
@@ -273,11 +221,11 @@ return function(dispatch){
 			dispatch(fetchFullInfo(partialInfo));
 		}
 		else{
-			
+
 			dispatch(
 				type: FETCH_BETS,
 				payload:[{
-					title: '', 
+					title: '',
 					date: '',
 					prize: '',
 					p1: '',
@@ -288,19 +236,9 @@ return function(dispatch){
 			);
 		}
 
-<<<<<<< HEAD
-           });
-
-          //for each bet detail of variable info, find the username of participant2
-          var betInfo = [];
-
-          info.map(function(data){
-            console.log("data", data);
-            Firebase.database().ref('/users/' + data.participant2 + '/username').on('value', snapshot =>{
-=======
 	})
 	}
- 
+
 }
 
 export function fetchFullInfo(partialInfo){
@@ -308,7 +246,6 @@ export function fetchFullInfo(partialInfo){
 	console.log(partialInfo);
 	var fullInfo = [];
 	var databaseRef = Firebase.database().ref('bets').orderByChild("date");
->>>>>>> eaef2284b885ae028ae9db49014cbb0dfc8c84f1
 
 	databaseRef.on('child_added', function(snapshot){
 
@@ -341,7 +278,7 @@ export function fetchFullInfo(partialInfo){
 				}
 			}
 		});
-		//if info equals to partialInfo length, dispatch that shit 
+		//if info equals to partialInfo length, dispatch that shit
 		if (fullInfo.length === partialInfo.length){
 			dispatch({
 				type: FETCH_BETS,
