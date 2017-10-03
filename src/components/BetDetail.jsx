@@ -32,7 +32,7 @@ class BetDetail extends React.Component {
           <div className = "prizedetails"> Prize: { this.props.betDetails.prize }</div>
           <div className = "datedetails"> EndDate: { this.props.betDetails.date }</div>
           <div className = "winner"> Winner: <button> Add winner </button></div>
-          <div className = "description"> Desciption will go here </div>
+          <div className = "description"> { this.props.betDetails.details } </div>
           </div>
   }
 

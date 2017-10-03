@@ -133,6 +133,7 @@ export function createBet(bets){
 			title: bets.title,
 			prize: bets.prize,
 			date: bets.date,
+            description: bets.description,
 			addUser: bets.addUser,
 			inviter: inviter
 		};
@@ -525,8 +526,6 @@ export function declinedNotif(data){
     })
 }
 
-
-
 /** functions for bet details.
 **/
 
@@ -560,7 +559,8 @@ export function fetchSelectedBet(betid){
 						date: snapshot.val().date,
 						prize: snapshot.val().prize,
 						invitedpic: 'http://jonvilma.com/images/unknown-19.jpg',
-						invitedname: 'Invite an opponent'
+						invitedname: 'Invite an opponent',
+                        details: snapshot.val().description
 					}
 				})
 			}
@@ -573,7 +573,8 @@ export function fetchSelectedBet(betid){
 						date: snapshot.val().date,
 						prize: snapshot.val().prize,
 						invitedpic: snapshot.val().invitedpic,
-						invitedname: snapshot.val().inviteduser
+						invitedname: snapshot.val().inviteduser,
+                        details: snapshot.val().description
 					}
 			})
 		});

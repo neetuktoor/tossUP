@@ -3,7 +3,7 @@ import {FETCH_BETS, SELECT_BET, FETCH_SELECTED_DETAILS} from '../actions';
 const initialState = {
   currentBets: [{title: '', date: '', prize: '', p1: '', p1pic: '', p2: '', p2pic: ''}],
   selectedBet: '',
-  selectedDetails: {title: '', inviterpic: '', invitername: '', date: '', prize: '', invitedpic: '', invitedname: ''}
+  selectedDetails: {title: '', inviterpic: '', invitername: '', date: '', prize: '', invitedpic: '', invitedname: '', details: ''}
 }
 
 export default function bets (state = initialState, action) {
