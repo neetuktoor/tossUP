@@ -1,8 +1,9 @@
-import {FETCH_BETS, SELECT_BET} from '../actions';
+import {FETCH_BETS, SELECT_BET, FETCH_SELECTED_DETAILS} from '../actions';
 
 const initialState = {
   currentBets: [{title: '', date: '', prize: '', p1: '', p1pic: '', p2: '', p2pic: ''}],
-  selectedBet: ''
+  selectedBet: '',
+  selectedDetails: {title: '', inviterpic: '', invitername: '', date: '', prize: '', invitedpic: '', invitedname: '', details: ''}
 }
 
 export default function bets (state = initialState, action) {
@@ -17,7 +18,11 @@ export default function bets (state = initialState, action) {
         ...state,
         selectedBet: action.payload
       }
-
+    case FETCH_SELECTED_DETAILS:
+      return{
+        ...state,
+        selectedDetails: action.payload
+      } 
     default:
       return state;
   }
