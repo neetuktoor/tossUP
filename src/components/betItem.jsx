@@ -9,10 +9,11 @@ class BetItem extends React.Component {
   }
 
   selectBet(){
-
     //change the state of the selected Bet
     this.props.SelectBet(this.props.bets);
+    this.props.ShowBet();
   }
+
 
   renderCurrentBets = () => {
     if ( this.props.bets.title === ''){
