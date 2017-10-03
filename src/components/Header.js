@@ -25,11 +25,11 @@ class Header extends React.Component {
 		else {
 			return [
 				<li className = "nav-item" key = {1}>
-					<Link className = "nav-link" to = "/login"> <h5> Log in </h5> </Link>
+					<Link className = "headerLink" to = "/login"> Log in </Link>
 				</li>,
 
 				<li className = "nav-item" key= {2}>
-					<Link className = "nav-link" to = "/signup"> <h5> Sign Up </h5> </Link>
+					<Link className = "headerLink" to = "/signup"> Sign Up </Link>
 				</li>
 			]
 		}
@@ -40,7 +40,7 @@ class Header extends React.Component {
 			<nav className = "navbar navbar-default">
 				<div className = "container-fluid">
 					<div className = "navbar-header">
-						<Link className = "navbar-brand" to = "/">  Toss Up  </Link>
+						<Link className = "title" to = "/"> tossUp </Link>
 					</div>
 
 					<ul className = "nav navbar-nav navbar-right">

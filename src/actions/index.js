@@ -131,6 +131,7 @@ export function createBet(bets){
 			title: bets.title,
 			prize: bets.prize,
 			date: bets.date,
+      description: bets.description,
 			addUser: bets.addUser,
 			inviter: inviter
 		};
@@ -520,23 +521,3 @@ export function declinedNotif(data){
         addUser: "Add a user"
     })
 }
-
-
-
-/** functions for bet details.
-**/
-
-
-//function to change the state of the selected bet 
-export function onSelectBet(betData){
-
-	//get the id of the bet
-	var betid = betData.bet.id;
-	//change the state of the selected bet (send to reducers)
-	return {
-        type: SELECT_BET,
-        payload: betid
-    }
-
-}
-

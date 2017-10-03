@@ -1,11 +1,4 @@
 
-
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
-/*body {
-  background-color: lightgray;
-}*/
-
 .btn-primary {
     color: white;
     background-color: black;
@@ -18,12 +11,6 @@
   cursor: pointer;
 }
 
-/*.btn-primary:hover {
-    background-color: gray;
-    border-color: lightgray;
-    color: white;
-}*/
-
 h2{
   color: teal;
   font-family: 'Roboto', sans-serif;
@@ -32,13 +19,12 @@ h2{
 }
 
 .navbar {
-    /*position: relative;*/
-    /*min-height: 50px;*/
-    /*margin-bottom: 20px;*/
-    /*border: 1px solid transparent;*/
-    background-color: teal;
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent
     width: 100%;
-
+    background-color: black;
 }
 
 h5 {
@@ -54,6 +40,26 @@ h3 {
 
 }
 
-.navbarbrand2 {
+.title {
+  color: white;
+  font-size: 40px;
+}
+
+.title:hover {
+  color: white;
+  /*font-style: italic;*/
+  font-style: oblique;
+  text-decoration: none;
+}
+
+.footer{
   background-color: red;
+  position: relative;
+  margin-top: 250px;
+  width: 100%;
+}
+
+.headerLink:hover {
+  font-size: 30px;
+  font-style: oblique;
 }

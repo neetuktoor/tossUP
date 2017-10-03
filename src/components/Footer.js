@@ -22,7 +22,7 @@ class Footer extends React.Component {
 		else {
 			return(
 				<div>
-  					<Link className="footerbrand2" to = "/login"><img src = "../style/images/homepage.jpg"/></Link>
+  					<Link className="footerbrand2" to = "/login"><img className = "home" src = "../style/images/homepage.jpg"/></Link>
   					<Link className="footerbrand2" to = "/notifications"><img src = "../style/images/notification.png"/></Link>
   					<Link className="footerbrand2" to = "/profile"><img src = "../style/images/profile.jpg"/></Link>
             <Link className="footerbrand2" to = "/createbet"><img src = "../style/images/add.png"/></Link>
@@ -33,7 +33,7 @@ class Footer extends React.Component {
 
 	render(){
 		return (
-			<nav className="footbar fixed-bottom footbar-light bg-faded">
+			<nav className="footer">
 				{ this.renderAuthLinks() }
 			</nav>
 			);
