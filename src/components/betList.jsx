@@ -24,6 +24,12 @@ class betList extends React.Component {
       this.setState({fetched: true});
     }
 
+    if(nextProps.selectedBet){
+
+      //fetch data for selectedBet if there is a selected bet
+    //   this.props.actions.fetchSelectedDetails(nextProps.selectedBet);
+     }
+
   }
 
   currentBets() {
@@ -31,6 +37,7 @@ class betList extends React.Component {
       console.log("bet", bet);
       return <BetItem key = { bet.title }
                       bets = { bet }
+                      SelectBet = { () => { this.props.actions.onSelectBet({ bet }) } }
               />
 
     });
@@ -59,7 +66,9 @@ class betList extends React.Component {
 function mapStateToProps(state) {
 
     return {
-      currentBet: state.bets.currentBets
+      currentBet: state.bets.currentBets,
+      selectedBet: state.bets.selectedBet
+
     };
 }
 

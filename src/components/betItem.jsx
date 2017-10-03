@@ -8,6 +8,11 @@ class BetItem extends React.Component {
     }
   }
 
+  selectBet(){
+
+    //change the state of the selected Bet
+    this.props.SelectBet(this.props.bets);
+  }
 
   renderCurrentBets = () => {
     if ( this.props.bets.title === ''){
@@ -15,11 +20,11 @@ class BetItem extends React.Component {
     }
 
     else if (this.state.responded === false){
-      return <div className = "currentbets" > 
+      return <div className = "currentbets" onClick = { () => { this.selectBet() } } > 
         <h2> {this.props.bets.title } </h2>
         <div className = "participants"> { this.props.bets.p1 } vs { this.props.bets.p2 } </div>
         <div className = "profiles"> <img src = { this.props.bets.p1pic }></img> vs <img src = { this.props.bets.p2pic }></img> </div>
-        Prize : { this.props.bets. prize }
+        Prize : { this.props.bets.prize }
         </div>
       
     }

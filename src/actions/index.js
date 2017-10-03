@@ -11,6 +11,7 @@ export const FETCH_INVITE_NOTIFICATIONS = 'FETCH_INVITE_NOTIFICATIONS';
 export const FETCH_ACCEPTED_NOTIFICATIONS = 'FETCH_ACCEPTED_NOTIFICATIONS';
 export const FETCH_DECLINED_NOTIFICATIONS = 'FETCH_DECLINED_NOTIFICATIONS';
 export const FETCH_BETS = 'FETCH_BETS';
+export const SELECT_BET = 'SELECT_BET';
 //holds the shit to hold access key for firebase
 var config = {
     apiKey: "AIzaSyDBlxK-zxp7wRMEneeUYCsDlHrdYngU-Ro",
@@ -195,10 +196,7 @@ export function betAddedNotif(betadded){
 
 //function to fetch all the bets for that user in the database
 export function fetchBetInfo(){
-<<<<<<< HEAD
 
-=======
->>>>>>> e5346d7b9b6f2caa9e9aac9796887f4136d06a42
 return function(dispatch){
 
 	//get all the bet ids from the current user in the database
@@ -210,10 +208,7 @@ return function(dispatch){
 		if (snapshot.val().bets !== null){
 
 			var allBetArr = Object.keys(snapshot.val().bets);
-<<<<<<< HEAD
 
-=======
->>>>>>> e5346d7b9b6f2caa9e9aac9796887f4136d06a42
 
 			//for each of the bets, return back current user username, profile pic, and betid, and inviter
 			partialInfo = allBetArr.map(function(bet){
@@ -233,6 +228,7 @@ return function(dispatch){
 			dispatch(
 				type: FETCH_BETS,
 				payload:[{
+					id: '',
 					title: '',
 					date: '',
 					prize: '',
@@ -244,10 +240,6 @@ return function(dispatch){
 			);
 		}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e5346d7b9b6f2caa9e9aac9796887f4136d06a42
 	})
 	}
 
@@ -258,10 +250,7 @@ export function fetchFullInfo(partialInfo){
 	console.log(partialInfo);
 	var fullInfo = [];
 	var databaseRef = Firebase.database().ref('bets').orderByChild("date");
-<<<<<<< HEAD
 
-=======
->>>>>>> e5346d7b9b6f2caa9e9aac9796887f4136d06a42
 
 	databaseRef.on('child_added', function(snapshot){
 
@@ -271,6 +260,7 @@ export function fetchFullInfo(partialInfo){
 
 				if(data.currentuserid === snapshot.val().inviter){
 					fullInfo.push({
+						id: data.betid,
 						title: snapshot.val().title,
 						date: snapshot.val().date,
 						prize: snapshot.val().prize,
@@ -283,6 +273,7 @@ export function fetchFullInfo(partialInfo){
 				//he is the invited
 				else{
 					fullInfo.push({
+						id: data.betid,
 						title: snapshot.val().title,
 						date: snapshot.val().date,
 						prize: snapshot.val().prize,
@@ -529,3 +520,23 @@ export function declinedNotif(data){
         addUser: "Add a user"
     })
 }
+
+
+
+/** functions for bet details.
+**/
+
+
+//function to change the state of the selected bet 
+export function onSelectBet(betData){
+
+	//get the id of the bet
+	var betid = betData.bet.id;
+	//change the state of the selected bet (send to reducers)
+	return {
+        type: SELECT_BET,
+        payload: betid
+    }
+
+}
+
