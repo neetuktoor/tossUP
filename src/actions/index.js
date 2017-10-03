@@ -12,6 +12,8 @@ export const FETCH_ACCEPTED_NOTIFICATIONS = 'FETCH_ACCEPTED_NOTIFICATIONS';
 export const FETCH_DECLINED_NOTIFICATIONS = 'FETCH_DECLINED_NOTIFICATIONS';
 export const FETCH_BETS = 'FETCH_BETS';
 export const SELECT_BET = 'SELECT_BET';
+export const FETCH_SELECTED_DETAILS = 'FETCH_SELECTED_DETAILS';
+
 //holds the shit to hold access key for firebase
 var config = {
     apiKey: "AIzaSyDBlxK-zxp7wRMEneeUYCsDlHrdYngU-Ro",
@@ -269,6 +271,7 @@ export function fetchFullInfo(partialInfo){
 						p2: snapshot.val().inviteduser,
 						p2pic: snapshot.val().invitedpic
 					})
+                    
 				}
 				//he is the invited
 				else{
@@ -282,6 +285,7 @@ export function fetchFullInfo(partialInfo){
 						p2: snapshot.val().invitername,
 						p2pic: snapshot.val().inviterpic
 					})
+
 				}
 			}
 		});
@@ -538,5 +542,41 @@ export function onSelectBet(betData){
         payload: betid
     }
 
+}
+
+//function to fetch the details of selected bet and send to reducers
+export function fetchSelectedBet(betid){
+	return function(dispatch){
+		//find details of the betid in the all bets table
+		Firebase.database().ref('/bets/' + betid).on('value', snapshot => {
+			console.log("details", snapshot.val());
+			if (snapshot.val().addUser = "Add a user" ){
+				dispatch({
+					type: FETCH_SELECTED_DETAILS,
+					payload: {
+						title: snapshot.val().title,
+						inviterpic: snapshot.val().invitedpic,
+						invitername: snapshot.val().invitername,
+						date: snapshot.val().date,
+						prize: snapshot.val().prize,
+						invitedpic: 'http://jonvilma.com/images/unknown-19.jpg',
+						invitedname: 'Invite an opponent'
+					}
+				})
+			}
+			dispatch({
+				type: FETCH_SELECTED_DETAILS,
+					payload: {
+						title: snapshot.val().title,
+						inviterpic: snapshot.val().invitedpic,
+						invitername: snapshot.val().invitername,
+						date: snapshot.val().date,
+						prize: snapshot.val().prize,
+						invitedpic: snapshot.val().invitedpic,
+						invitedname: snapshot.val().inviteduser
+					}
+			})
+		});
+	}
 }
 
