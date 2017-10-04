@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Comments from './Comments';
+
 class BetDetail extends React.Component {
   constructor(props){
     super(props);
@@ -42,7 +44,10 @@ class BetDetail extends React.Component {
       return <img src = '../style/images/loading.jpg'/>
     }
 
-    return <div>{ this.renderDetails() }</div>
+    return <div>
+            { this.renderDetails() }
+            <Comments />
+          </div>
   }
 }
 
