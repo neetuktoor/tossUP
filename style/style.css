@@ -1,28 +1,31 @@
 
 .btn-primary {
-    color: white;
-    background-color: black;
-    border-color: black;
-    width: 250px;
-    border-radius: 20px;
-    box-shadow: 0 10px 6px -6px #777;
-    margin-left: 130px;
-    height: 40px;
+  border: none;
+  border-radius: 28px;
+  font-weight: 100;
+  color: #ffffff;
+  font-size: 18px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  background-color: black;
+  width: 70%;
+  box-shadow: 0 6px 3px -3px #777;
+  text-transform: uppercase;
+  transition: 0.5s;
   cursor: pointer;
+  margin-bottom: 2%;
 }
 
-h2{
-  color: teal;
-  font-family: 'Roboto', sans-serif;
-  font-size: 40px;
-  text-shadow: 0 -1px 0 #fff;
+.btn-primary:hover{
+opacity: .9;
+background-color: black;
 }
 
 .navbar {
     position: relative;
     min-height: 50px;
     margin-bottom: 20px;
-    border: 1px solid transparent
+    border: 1px solid transparent;
     width: 100%;
     background-color: black;
 }
@@ -53,13 +56,101 @@ h3 {
 }
 
 .footer{
-  background-color: gray;
+  background-color: white;
   position: relative;
   margin-top: 250px;
   width: 100%;
+  margin-top: 3px black;
 }
 
-.headerLink:hover {
-  font-size: 30px;
-  font-style: oblique;
+.icon1 {
+  padding-right: 10px;
+}
+
+.icon2 {
+float: right;
+padding-left: 10px;
+padding-right: 10px;
+padding-top: 5px;
+}
+
+.form-control {
+    display: block;
+    width: 70%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 0;
+    border-bottom: 1px solid lightgray;
+    border-radius: 4px;
+}
+
+.loginContainer {
+  width: 50%;
+  background-color: white;
+  margin-left: 25%;
+  padding-left: 12%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin-top: 2%;
+}
+
+.loginText{
+  font-weight: 100;
+  color: black;
+  font-size: 18px;
+}
+
+.logoImg {
+  width: 45%;
+  height: 45%;
+  margin-left: 15%;
+}
+
+.beep{
+  margin-left: 25%;
+  font-weight: 105;
+  font-size: 2em;
+  color: orange;
+}
+
+body {
+  /*background-image: url("https://images.pond5.com/numbers-background-footage-008985563_iconl.jpeg");*/
+background-color: lightgray;
+color: white;
+}
+
+.profilePic {
+  border-radius: 100%;
+  width: 20%;
+  height: 20%;
+  border: 1px solid lightgray;
+}
+
+.profiles {
+  background-color: maroon;
+  height: 100%;
+  width: 100%;
+  padding-left: 35%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.betTitle {
+  color: maroon;
+  text-align: center;
+}
+
+.participants {
+  background-color: black;
+  text-align: center;
+  font-size: 18px;
+}
+
+.prizeText {
+  font-size: 12px;
 }

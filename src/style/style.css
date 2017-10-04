@@ -50,5 +50,7 @@ h3 {
   font-size: 32px;
 }
 
-.notification {
-  background-color: red;
+.exit {
+  width: 20px;
+  height: 20px;
+}

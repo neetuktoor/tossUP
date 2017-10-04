@@ -21,13 +21,13 @@ class BetItem extends React.Component {
     }
 
     else if (this.state.responded === false){
-      return <div className = "currentbets" onClick = { () => { this.selectBet() } } > 
-        <h2> {this.props.bets.title } </h2>
-        <div className = "participants"> { this.props.bets.p1 } vs { this.props.bets.p2 } </div>
-        <div className = "profiles"> <img src = { this.props.bets.p1pic }></img> vs <img src = { this.props.bets.p2pic }></img> </div>
-        Prize : { this.props.bets.prize }
+      return <div className = "currentbets" onClick = { () => { this.selectBet() } } >
+        <h2 className="betTitle"> {this.props.bets.title } </h2>
+        <div className = "participants"> { this.props.bets.p1 }   vs   { this.props.bets.p2 } </div>
+        <div className = "profiles"> <img className= "profilePic" src = { this.props.bets.p1pic }></img> vs <img className= "profilePic" src = { this.props.bets.p2pic }></img> </div>
+        <h5 classname="prizeText"> Prize : { this.props.bets.prize } </h5>
         </div>
-      
+
     }
     return <div>  </div>
   }
@@ -37,6 +37,6 @@ class BetItem extends React.Component {
     return <div>{ this.renderCurrentBets() }</div>
   }
 }
-  
+
 
 export default BetItem;

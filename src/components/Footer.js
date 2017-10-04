@@ -11,9 +11,9 @@ class Footer extends React.Component {
 		if (!this.props.authenticated){
 			return(
 				<div>
-  					<Link className="footerbrand2" to = "/login"><img src = "../style/images/homepage.png"/></Link>
-  					<Link className="footerbrand2" to = "/login"><img src = "../style/images/notification.png"/></Link>
-  					<Link className="footerbrand2" to = "/login"><img src = "../style/images/profile.png"/></Link>
+  					{/* <Link className="footerbrand2" to = "/login"><img className="icon" src = "../style/images/homepage.png"/></Link>
+  					<Link className="footerbrand2" to = "/login"><img className="icon" src = "../style/images/notification.png"/></Link>
+  					<Link className="footerbrand2" to = "/login"><img className="icon" src = "../style/images/profile.png"/></Link> */}
 				</div>
 				);
 		}
@@ -22,10 +22,10 @@ class Footer extends React.Component {
 		else {
 			return(
 				<div>
-  					<Link className="footerbrand2" to = "/login"><img className = "home" src = "../style/images/homepage.png"/></Link>
-  					<Link className="footerbrand2" to = "/notifications"><img src = "../style/images/notification.png"/></Link>
-  					<Link className="footerbrand2" to = "/profile"><img src = "../style/images/profile.png"/></Link>
-            <Link className="footerbrand2" to = "/createbet"><img src = "../style/images/add.png"/></Link>
+  					<Link className="footerbrand2" to = "/login"><img className="icon1" src = "../style/images/homepage.png"/></Link>
+            <Link className="footerbrand2" to = "/profile"><img className="icon1" src = "../style/images/profile.png"/></Link>
+            <Link className="footerbrand2" to = "/notifications"><img className="icon2" src = "../style/images/notification.png"/></Link>
+            <Link className="footerbrand2" to = "/createbet"><img className="icon2" src = "../style/images/add.png"/></Link>
 				</div>
 				);
 		}

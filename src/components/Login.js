@@ -60,15 +60,16 @@ class Login extends React.Component {
 	render() {
     	return (
     		<div className= "container">
-    			<div className = "col-md-6 col-md-offset-3">
-    				<h2 className = "text-center"> Log In </h2>
+    			<div className = "loginContainer">
+            {/* <img className="logoImg" src="../style/images/logo.png"/> */}
+    				<h2 className = "beep"> LOG IN </h2>
 
     				{ this.renderAuthenticationError() }
 
     				<form onSubmit = { this.props.handleSubmit(this.handleFormSubmit) } >
 
     					<fieldset className = "form-group">
-    						<label> Email </label>
+    						<label className="loginText"> Email </label>
 
     						<Field
     							name = "email"
@@ -80,7 +81,7 @@ class Login extends React.Component {
     					</fieldset>
 
     					<fieldset className = "form-group">
-    						<label> Password </label>
+    						<label className="loginText"> Password </label>
 
     						<Field
     							name = "password"
@@ -96,8 +97,14 @@ class Login extends React.Component {
     						className= "btn btn-primary"
     					> Sign In </button>
 
+              <button
+                className= "btn btn-primary"
+                href="/signup"
+              > Sign Up </button>
+
     				</form>
     			</div>
+
     		</div>
     	);
   	}
