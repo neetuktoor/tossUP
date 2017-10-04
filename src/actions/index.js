@@ -13,6 +13,7 @@ export const FETCH_DECLINED_NOTIFICATIONS = 'FETCH_DECLINED_NOTIFICATIONS';
 export const FETCH_BETS = 'FETCH_BETS';
 export const SELECT_BET = 'SELECT_BET';
 export const FETCH_SELECTED_DETAILS = 'FETCH_SELECTED_DETAILS';
+export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 
 //holds the shit to hold access key for firebase
 var config = {
@@ -581,3 +582,58 @@ export function fetchSelectedBet(betid){
 	}
 }
 
+/** functions for comments
+**/
+
+//function to store comments in the database 
+export function storeComment(comment){
+    console.log("comment", comment);
+    
+    //find the current user username and profilepicture
+    const user = Firebase.auth().currentUser.uid;
+    Firebase.database().ref('/users/' + user).on('value', snapshot =>{
+
+        //store in the table comments under the bet: comments, username, and profilepicture 
+        Firebase.database().ref('/comments/' + comment.betid).push({
+            comment: comment.comment,
+            username: snapshot.val().username,
+            userpic: snapshot.val().profile_picture
+        });
+    });
+}
+
+//retrieving comments for the particular bet  
+export function fetchComments(betid){
+    return function(dispatch){
+        
+        Firebase.database().ref('/comments/' + betid).on ('value', snapshot =>{
+
+            //if the comments for this is not null
+            if (snapshot.val() !== null){
+                var commentArr = Object.keys(snapshot.val());
+
+                var datas = commentArr.map(function(data){
+
+                    return {
+                        comment: snapshot.val()[data].comment,
+                        username: snapshot.val()[data].username,
+                        userpic: snapshot.val()[data].userpic,
+                        id: data
+                    }
+                });
+
+                dispatch({
+                    type: FETCH_COMMENTS,
+                    payload: datas
+                });
+            }
+
+            else{
+                dispatch({
+                    type: FETCH_COMMENTS,
+                    payload: [{comment: '', username: '', userpic:'', id: ''}]
+                });
+            }
+        });
+    }
+}
