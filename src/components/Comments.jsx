@@ -8,8 +8,6 @@ class Comments extends React.Component {
 		super(props);
 		this.state = {
 			fetchedBet: false,
-			fetchedComments: false,
-			displayComments: true,
 			typed: ''
 		}
 		this.handleChange = this.handleChange.bind(this);
@@ -42,14 +40,7 @@ class Comments extends React.Component {
 		//store the comment into firebase
 		this.props.storeComment({comment: this.state.typed, betid: this.props.selectedBet});
 
-	}
 
-	exitComments(){
-		this.setState({ displayComments: false });
-	}
-
-	seeComments(){
-		this.setState({ displayComments: true }); 
 	}
 
 	renderComments(){
@@ -64,9 +55,9 @@ class Comments extends React.Component {
 	}
 
 	render(){
-		if (this.state.fetchedBet === true && this.state.displayComments === true && this.state.displayComments===true){
+		if (this.state.fetchedBet === true){
 			return <div className = "comments">
-					<h4> { this.props.betDetails.title } </h4> <button><img className = "minimize" src = '../style/images/minimize.png' onClick = { () => { this.exitComments() } } /></button>
+					<h4> { this.props.betDetails.title } </h4> 
 					
 					<ul> { this.renderComments() } </ul>
 
@@ -78,7 +69,7 @@ class Comments extends React.Component {
 					</span>
 				</div>
 		}
-		return <div> <h4 onClick = { () => { this.seeComments() } }> { this.props.betDetails.title } Chat Log </h4>  </div>
+		return <div> </div>
 	}
 }
 

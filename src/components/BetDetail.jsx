@@ -8,7 +8,8 @@ class BetDetail extends React.Component {
     super(props);
 
     this.state = {
-      fetchedDetails: false
+      fetchedDetails: false,
+      displayComments: true,
     }
 
     this.props.fetchDetails();
@@ -23,6 +24,15 @@ class BetDetail extends React.Component {
 
   exitDetails(){
     this.props.exOut();
+  }
+
+  exitComments(){
+    console.log("hello");
+    this.setState({ displayComments: false });
+  }
+
+  openComments(){
+    this.setState({ displayComments: true } );
   }
 
 
@@ -44,11 +54,23 @@ class BetDetail extends React.Component {
       return <img src = '../style/images/loading.jpg'/>
     }
 
-    return <div>
-            { this.renderDetails() }
-            <Comments />
+    if (this.state.displayComments === true){
+
+      return <div>
+             { this.renderDetails() }
+             <button><img className = "minimize" src = '../style/images/minimize.png' onClick = { () => { this.exitComments() } } /></button>
+             <Comments />
+            </div>
+    }
+
+    
+      return <div>
+                { this.renderDetails() }
+                <button> <img className = "openchat" src = '../style/images/arrow-141-512.jpg' onClick = { () => { this.openComments() } } /></button>
           </div>
-  }
+    }
+  
+
 }
 
 function mapStateToProps(state) {

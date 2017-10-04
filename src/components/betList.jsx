@@ -6,6 +6,7 @@ import { BrowserRouter, Redirect } from 'react-router-dom';
 
 import BetItem from './betItem';
 import BetDetail from './BetDetail';
+import Comments from './Comments';
 
 class betList extends React.Component {
   constructor(props){
@@ -13,7 +14,9 @@ class betList extends React.Component {
 
     this.state = {
       fetched: false,
-      selected: false
+      selected: false,
+      displayComments: false, 
+      firsttimeSelect: false
     }
 
     this.props.actions.fetchBetInfo();
@@ -29,20 +32,47 @@ class betList extends React.Component {
   }
 
   showBetDetails(){
-    this.setState({ selected: true });
+    this.setState({ selected: true, firsttimeSelect: true });
+
   }
 
   exitBetDetails(){
     this.setState({ selected: false });
   }
 
-  currentBets() {
+  showComments(){
+    this.setState({ displayComments: true});
+  }
+
+  exitComments(){
+    this.setState({ displayComments: false});
+  }
+
+  currentBetsWithoutChat() {
     var bItem = this.props.currentBet.map((bet) => {
-      return <BetItem key = { bet.title }
+      return <div>
+              <BetItem key = { bet.title }
                       bets = { bet }
                       SelectBet = { () => { this.props.actions.onSelectBet({ bet }) } }
                       ShowBet = { () => { this.showBetDetails() } }
               />
+              </div>
+
+    });
+    
+    return bItem;
+  }
+
+  currentBets() {
+    var bItem = this.props.currentBet.map((bet) => {
+      return <div>
+              <BetItem key = { bet.title }
+                      bets = { bet }
+                      SelectBet = { () => { this.props.actions.onSelectBet({ bet }) } }
+                      ShowBet = { () => { this.showBetDetails() } }
+              />
+
+              <img onClick ={ () => { this.showComments() } } src = "../style/images/chat.png"/></div>
 
     });
     
@@ -54,18 +84,36 @@ class betList extends React.Component {
         return <img src = '../style/images/loading.jpg'/>
       }
 
+      if (this.state.displayComments === true){
+        return <div>  
+               <button className = "exit"> <img src = "https://cdn2.iconfinder.com/data/icons/interface-part-1/32/circle-ex-512.png" onClick = { () => { this.exitComments() } } />  </button>
+                <Comments />
+              </div>
+      }
+
       if (this.state.selected === true){
-        console.log("its true");
         return <BetDetail fetchDetails = { () => { this.props.actions.fetchSelectedBet( this.props.selectedBet ) } }
                           exOut = { () => { this.exitBetDetails() } }
                />
       }
-      else{
-          return(
-         <div>
-           <h2> Current Bets </h2>
 
-             { this.currentBets() }
+      else if (this.state.firsttimeSelect === false){
+        return (
+            <div>
+              <h2> Current Bets </h2>
+
+             { this.currentBetsWithoutChat() }
+
+            </div>
+          );
+      }
+
+      else {
+          return(
+            <div>
+              <h2> Current Bets </h2>
+
+              { this.currentBets() }
 
             </div>
          );
