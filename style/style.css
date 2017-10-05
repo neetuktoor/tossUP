@@ -251,25 +251,35 @@ color: black;
   margin-bottom: 0;
 }
 
-.exit{
-  width: 7%;
-  height: 10%;
-  background-color: black;
-  border: 1px solid black;
+.exitDeets {
   color: white;
-  border-radius: 50%;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  background-color: blue;
+  padding-top: 5px;
+  padding-bottom: 5px;
   font-size: 18px;
   float: right;
-  margin-right: 10%;
+  border: none;
+}
+
+.exitDeets:hover{
+  opacity: .6;
+}
+
+.exit{
+  color: white;
+  background-color: gray;
+  border: 1px solid gray;
+  /*padding-left: 5px;
+  padding-right: 5px;*/
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 18px;
+  float: right;
+  margin-right: 20%;
 }
 
 .exit:hover{
   opacity: .6;
-  background-color: black;
 }
 
 
