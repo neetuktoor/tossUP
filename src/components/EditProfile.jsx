@@ -42,12 +42,12 @@ class EditProfile extends React.Component {
 	renderField = ({ input, label, type, meta: { touched, error } }) => (
     	<fieldset className={`form-group ${touched && error ? 'has-error' : ''}`}>
       		<label className="control-label">{label}</label>
-      		
+
       		<div>
-        	<input {...input} 
-        		placeholder={label} 
-        		className="form-control" 
-        		type={type} 
+        	<input {...input}
+        		placeholder={label}
+        		className="form-control"
+        		type={type}
         	/>
         		{ touched && error && <div className="help-block">{ error }</div> }
       		</div>
@@ -60,17 +60,17 @@ class EditProfile extends React.Component {
 
 		if(redirect){
 			return <Redirect to = '/profile' />;
-		} 
+		}
 
 		return(
 			<div className = "container">
-				<div className = "col-md-6 col-md-offset-3">
-					<h2 className = "text-center"> Edit Profile </h2>
+				<div className = "editProfContainer">
+					<h2 className = "beepbeep"> Edit Profile </h2>
 
 					<form onSubmit = { this.props.handleSubmit(this.handleFormSubmit)}>
-						
+
 						<fieldset className = "form-group">
-						<label> New Display Name </label>
+						<label className="loginText"> New Display Name </label>
 						<Field name = "displayname"
 							component = {this.renderField}
 							className = "form-control"
@@ -79,7 +79,7 @@ class EditProfile extends React.Component {
 						</fieldset>
 
 						<fieldset className = "form-group">
-						<label> Update Profile Picture </label>
+						<label className="loginText"> Update Profile Picture </label>
 						<Field name = "profilepic"
 							component = {this.renderField}
 							className = "form-control"
@@ -88,7 +88,7 @@ class EditProfile extends React.Component {
 						</fieldset>
 
 						<fieldset className = "form-group">
-						<label> Verify Email </label>
+						<label className="loginText"> Verify Email </label>
 						<Field name = "email"
 							component = {this.renderField}
 							className = "form-control"

@@ -19,13 +19,13 @@ class Profile extends React.Component {
 	render(){
 		return (
 			<div className = "container">
-				<div className = "col-md-12">
-					<h2 className = "text-center"> Profile Page </h2>
+				<div className = "editProfContainer">
+					<h2 className = "beepbeep"> Profile Page </h2>
 					{ this.renderUserError() }
 					<img className = "profilepic" src = { this.props.Pic } />
 					<div > { this.props.Name } </div>
 					<div > Email: { this.props.Email } </div>
-					<Link to = "/editprofile"><button className = "btn btn-primary btn-lg"> Edit Profile</button></Link>
+					<Link to = "/editprofile"><button className = "editBTN"> Edit Profile</button></Link>
 				</div>
 			</div>
 		);
