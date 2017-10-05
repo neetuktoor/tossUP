@@ -64,8 +64,8 @@ class Comments extends React.Component {
 
 					<span>
 						<form onSubmit = { this.handleSubmit }>
-							<input onChange = { this.handleChange } />
-							<input type = "submit" value= "Send"/>
+							<input className= "chatBar" onChange = { this.handleChange } />
+							<input className= "chatBtn" type = "submit" value= "Send"/>
 						</form>
 					</span>
 				</div>
