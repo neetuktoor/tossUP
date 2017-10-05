@@ -42,7 +42,7 @@ class NotifList extends React.Component {
 
 			this.setState({declinedfetched: true});
 
-		}	
+		}
 	}
 
 	invited (){
@@ -93,7 +93,7 @@ class NotifList extends React.Component {
 
 		return (
 			<div className = "notif-list">
-				<h2 className = "text-center" > Notifications </h2>
+				<h2 className = "beepbeep" > Notifications </h2>
 				{ this.invited() }
 
 				{ this.accepted() }
