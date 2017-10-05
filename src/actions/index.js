@@ -222,7 +222,7 @@ return function(dispatch){
 	const currentuser = Firebase.auth().currentUser.uid;
 	var partialInfo = [];
 	Firebase.database().ref('/users/' + currentuser).on('value', snapshot => {
-        console.log("bets", snapshot.val());
+        console.log("fetching bets", snapshot.val());
         if (snapshot.val() === null || snapshot.val().bets === undefined){
             dispatch({
                 type: FETCH_BETS,
@@ -321,6 +321,7 @@ export function fetchFullInfo(partialInfo){
 				}
 			}
 		});
+        console.log(fullInfo.length, partialInfo.length);
 		//if info equals to partialInfo length, dispatch that shit
 		if (fullInfo.length === partialInfo.length){
 			dispatch({

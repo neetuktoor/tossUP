@@ -49,8 +49,8 @@ class betList extends React.Component {
   }
 
   currentBetsWithoutChat() {
-    console.log(this.props.currentBet.title);
-    if(this.props.currentBet.title ===undefined){
+    console.log("hello", this.props.currentBet);
+    if(this.props.currentBet[0].title === ''){
       return <div> No bets yet </div>
     }
     else{
@@ -70,7 +70,7 @@ class betList extends React.Component {
   }
 
   currentBets() {
-    if(this.props.currentBet.title === undefined){
+    if(this.props.currentBet[0].title === ''){
       return <div> No bets yet </div>
     } else {
     var bItem = this.props.currentBet.map((bet) => {
