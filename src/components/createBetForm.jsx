@@ -54,7 +54,7 @@ class createBetForm extends React.Component {
 
   renderField = ({ input, label, type, meta: { touched, error } }) => (
     	<fieldset className={`form-group ${touched && error ? 'has-error' : ''}`}>
-      		<label className="control-label">{label}</label>
+      		<label className="loginText">{label}</label>
 
       		<div>
         	<input {...input}
@@ -78,12 +78,12 @@ class createBetForm extends React.Component {
       return (
         <div className= "container">
           <div className = "col-md-6 col-md-offset-3">
-            <h2 className = "text-center"> Create a New Bet </h2>
+            <h2 className = "beepbeep"> Create a New Bet </h2>
 
             <form onSubmit = { this.props.handleSubmit(this.handleFormSubmit) } >
 
               <fieldset className = "form-group">
-                <label> Title </label>
+                <label className="loginText"> Title </label>
 
                 <Field
                   name = "title"
@@ -95,7 +95,7 @@ class createBetForm extends React.Component {
               </fieldset>
 
               <fieldset className = "form-group">
-                <label> Description </label>
+                <label className="loginText"> Description </label>
 
                 <Field
                   name = "description"
@@ -107,7 +107,7 @@ class createBetForm extends React.Component {
               </fieldset>
 
               <fieldset className = "form-group">
-                <label> Prize </label>
+                <label className="loginText"> Prize </label>
 
                 <Field
                   name = "prize"
@@ -119,7 +119,7 @@ class createBetForm extends React.Component {
               </fieldset>
 
               <fieldset className = "form-group">
-                <label> End Date </label>
+                <label className="loginText"> End Date </label>
 
                 <Field
                   name = "date"
@@ -131,7 +131,7 @@ class createBetForm extends React.Component {
               </fieldset>
 
               <fieldset className = "form-group">
-                <label> Add User by Email </label>
+                <label className="loginText"> Add User by Email </label>
 
               <Field
                   name = "addUser"
