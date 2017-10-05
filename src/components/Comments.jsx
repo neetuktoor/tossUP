@@ -15,12 +15,12 @@ class Comments extends React.Component {
 
 		this.props.fetchSelectedBet(this.props.selectedBet);
 		this.props.fetchComments(this.props.selectedBet);
-		
+
 	}
 
 
 	componentWillReceiveProps(nextProps){
-		
+
 		if (nextProps.betDetails){
 			this.setState({ fetchedBet: true });
 		}
@@ -44,10 +44,11 @@ class Comments extends React.Component {
 	}
 
 	renderComments(){
-		var commentItems = this.props.Comments.map((item) => 
+		var commentItems = this.props.Comments.map((item) =>
 			<li key= { item.id }>
-			<span> <img className = "commentpic" src ={ item.userpic }/> <div className = "thecomment"> { item.comment } </div> </span>
-			<div className = "commentname"> { item.username } </div>
+      {/* <div className = "commentname"> { item.username } </div> */}
+      <span> <img className = "commentpic" src ={ item.userpic }/> <div className = "thecomment"> { item.comment } </div> </span>
+
 			</li>
 		);
 
@@ -57,8 +58,8 @@ class Comments extends React.Component {
 	render(){
 		if (this.state.fetchedBet === true){
 			return <div className = "comments">
-					<h4> { this.props.betDetails.title } </h4> 
-					
+					<h4> { this.props.betDetails.title } </h4>
+
 					<ul> { this.renderComments() } </ul>
 
 					<span>

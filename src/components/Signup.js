@@ -28,24 +28,24 @@ const validate = values => {
 }
 
 class Signup extends React.Component {
-  
+
   handleFormSubmit = (values) => {
   	console.log(values);
   	this.props.signUpUser(values);
   }
 
   //by using ...input we are deconstructuring the value of input prop and merging in
-  //values provided by Field component 
+  //values provided by Field component
 
   //condition: if touched and if there is error, display error and add has-error on fieldset
   //also added control-label and help-block to actual error text
   renderField = ({ input, label, type, meta: {touched, error } }) => (
   	<fieldset className = {`form-group ${touched && error ? 'has-error' : ''}`}>
-  		<label className="control-label">{ label }</label>
+  		<label className="loginText">{ label }</label>
   		<div>
-  			<input 
-  				{...input} 
-  				placeholder = { label }
+  			<input
+  				{...input}
+  				// placeholder = { label }
   				className = "form-control"
   				type= { type }
   			/>
@@ -66,29 +66,30 @@ class Signup extends React.Component {
   render() {
     return (
     	<div className = "container">
-    		<div className = "col-md-6 col-md-offset-3">
-    			<h2 className = "text-center"> Sign Up </h2>
+    		<div className = "loginContainer">
+    			<h2 className = "beep"> SIGN UP </h2>
 
     			{ this.renderAuthenticationError()}
 
     			<form onSubmit = {this.props.handleSubmit(this.handleFormSubmit)}>
 
-    			<Field 
-    				name = "email" 
+    			<Field
+            className="loginText"
+    				name = "email"
     				type = "text"
     				component = {this.renderField}
     				label = "Email"
     			/>
 
-    			<Field 
-    				name = "password" 
+    			<Field
+    				name = "password"
     				type = "password"
     				component = {this.renderField}
     				label = "Password"
     			/>
 
-    			<Field 
-    				name = "passwordConfirmation" 
+    			<Field
+    				name = "passwordConfirmation"
     				type = "password"
     				component = {this.renderField}
     				label = "Password Confirmation"

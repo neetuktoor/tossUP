@@ -12,30 +12,30 @@ class NotifInvite extends React.Component {
 	acceptInvite(){
 		this.setState({ responded: true });
 		//calling action creator to accept invite (change in database)
-		
+
 		this.props.AcceptInvite(this.props.notif.betid);
 	}
 
 	declineInvite(notif){
 		this.setState({ responded: true });
 		//calling action creator to accept invite (change in database)
-		
+
 		this.props.DeclineInvite(this.props.notif);
 	}
 
 	renderNotifInvited = () => {
-		
-		
+
+
 		if ( this.props.notif.bet === ''){
 			return <div> You were not recently invited to any bets.</div>
 		}
 
 		else if (this.state.responded === false){
-			return <div> 
+			return <div>
 				You were invited to <i>{ this.props.notif.bet }</i> by <i>{ this.props.notif.inviter }</i>
-				<button onClick = { () => { this.acceptInvite() } }  > Accept invite </button>
-				<button onClick = { () => { this.declineInvite() } } > Decline invite </button></div>
-			
+				<button className="acceptBTN" onClick = { () => { this.acceptInvite() } }  > ACCEPT  </button>
+				<button className="declineBTN" onClick = { () => { this.declineInvite() } } > DECLINE  </button></div>
+
 		}
 		return <div> </div>
 	}
@@ -43,9 +43,9 @@ class NotifInvite extends React.Component {
 	render(){
 		return <div>{ this.renderNotifInvited() }</div>
 	}
-		
-	
-	
+
+
+
 }
 
 export default NotifInvite;

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
-import { BrowserRouter, Redirect } from 'react-router-dom';
 
-const validate = values => {
+
+ const validate = values => {
 		const errors = {};
 
 		if (!values.title){

@@ -15,7 +15,7 @@ class betList extends React.Component {
     this.state = {
       fetched: false,
       selected: false,
-      displayComments: false, 
+      displayComments: false,
       firsttimeSelect: false
     }
 
@@ -59,23 +59,25 @@ class betList extends React.Component {
               </div>
 
     });
-    
+
     return bItem;
   }
 
   currentBets() {
     var bItem = this.props.currentBet.map((bet) => {
-      return <div>
+      return <div className="betsbets">
               <BetItem key = { bet.title }
                       bets = { bet }
                       SelectBet = { () => { this.props.actions.onSelectBet({ bet }) } }
                       ShowBet = { () => { this.showBetDetails() } }
               />
 
-              <img onClick ={ () => { this.showComments() } } src = "../style/images/chat.png"/></div>
+              <img onClick ={ () => { this.showComments() } } src = "../style/images/chat.png" className="chatIcon"/>
+
+            </div>
 
     });
-    
+
     return bItem;
   }
 
@@ -85,7 +87,7 @@ class betList extends React.Component {
       }
 
       if (this.state.displayComments === true){
-        return <div>  
+        return <div>
                <button className = "exit"> <img src = "https://cdn2.iconfinder.com/data/icons/interface-part-1/32/circle-ex-512.png" onClick = { () => { this.exitComments() } } />  </button>
                 <Comments />
               </div>
@@ -100,7 +102,7 @@ class betList extends React.Component {
       else if (this.state.firsttimeSelect === false){
         return (
             <div>
-              <h2> Current Bets </h2>
+              <h2 className="beepbeep"> Current Bets </h2>
 
              { this.currentBetsWithoutChat() }
 
@@ -118,7 +120,7 @@ class betList extends React.Component {
             </div>
          );
       }
-      
+
   }
 }
 
@@ -131,7 +133,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  
+
   return{
     actions: bindActionCreators(Actions, dispatch)
   };

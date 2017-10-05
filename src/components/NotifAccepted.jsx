@@ -19,11 +19,11 @@ class NotifAccepted extends React.Component {
 		}
 
 		else if (this.state.responded === false){
-			return <div> 
-				<i>{ this.props.notif.invited }</i> accepted your bet to <i>{ this.props.notif.bet }</i>  
-				<button onClick = { () => { this.clear() } }  > Clear Notification </button>
+			return <div>
+				<i>{ this.props.notif.invited }</i> accepted your bet to <i>{ this.props.notif.bet }</i>
+				<button className = "clearBTN" onClick = { () => { this.clear() } }  > X </button>
 				</div>
-			
+
 		}
 		return <div> </div>
 	}
