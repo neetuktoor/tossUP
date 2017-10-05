@@ -44,6 +44,9 @@ class Comments extends React.Component {
 	}
 
 	renderComments(){
+    if (this.props.Comments[0].comment === ''){
+			return <li></li>
+		}
 		var commentItems = this.props.Comments.map((item) =>
 			<li key= { item.id }>
       {/* <div className = "commentname"> { item.username } </div> */}
