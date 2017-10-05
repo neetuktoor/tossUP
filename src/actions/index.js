@@ -39,6 +39,16 @@ export function signUpUser(credentials){
             })
     }
 }
+
+export function makedefaultProfile(){
+    const userUid = Firebase.auth().currentUser.uid;
+        Firebase.database().ref('users/' + userUid).update({
+            id: userUid,
+            username: 'No namer',
+            profile_picture: '../style/images/Nopic.png',
+            email: Firebase.auth().currentUser.email
+        });
+}
 //for firebase use
 export function signInUser(credentials) {
     return function(dispatch) {
@@ -114,11 +124,15 @@ export function fetchUserInfo(){
         //find user id
         const userUid = Firebase.auth().currentUser.uid;
         Firebase.database().ref('/users/' + userUid).on('value', snapshot => {
-            //console.log(“snapshot: “, snapshot.val());
+            console.log("snapshot: ", snapshot.val());
+            if (snapshot.val() === null){
+                dispatch(makedefaultProfile());
+            } else {
             dispatch({
                 type: FETCH_USER_INFO,
                 payload: snapshot.val()
             })
+            }
         });
     }
 }
@@ -208,9 +222,24 @@ return function(dispatch){
 	const currentuser = Firebase.auth().currentUser.uid;
 	var partialInfo = [];
 	Firebase.database().ref('/users/' + currentuser).on('value', snapshot => {
-
+        console.log("bets", snapshot.val());
+        if (snapshot.val() === null || snapshot.val().bets === undefined){
+            dispatch({
+                type: FETCH_BETS,
+                payload:[{
+                    id: '',
+                    title: '',
+                    date: '',
+                    prize: '',
+                    p1: '',
+                    p1pic: '',
+                    p2: '',
+                    p2pic: ''
+                }]
+            });
+        }
 		//if bets in the users table is not null
-		if (snapshot.val().bets !== null){
+		 else if (snapshot.val().bets !== null){
 
 			var allBetArr = Object.keys(snapshot.val().bets);
 
@@ -230,7 +259,7 @@ return function(dispatch){
 		}
 		else{
 
-			dispatch(
+			dispatch({
 				type: FETCH_BETS,
 				payload:[{
 					id: '',
@@ -242,7 +271,7 @@ return function(dispatch){
 					p2: '',
 					p2pic: ''
 				}]
-			);
+			});
 		}
 
 	})

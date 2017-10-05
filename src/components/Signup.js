@@ -32,6 +32,7 @@ class Signup extends React.Component {
   handleFormSubmit = (values) => {
   	console.log(values);
   	this.props.signUpUser(values);
+   
   }
 
   //by using ...input we are deconstructuring the value of input prop and merging in

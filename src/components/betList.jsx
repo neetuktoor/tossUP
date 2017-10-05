@@ -49,6 +49,11 @@ class betList extends React.Component {
   }
 
   currentBetsWithoutChat() {
+    console.log(this.props.currentBet.title);
+    if(this.props.currentBet.title ===undefined){
+      return <div> No bets yet </div>
+    }
+    else{
     var bItem = this.props.currentBet.map((bet) => {
       return <div>
               <BetItem key = { bet.title }
@@ -62,9 +67,14 @@ class betList extends React.Component {
 
     return bItem;
   }
+  }
 
   currentBets() {
+    if(this.props.currentBet.title === undefined){
+      return <div> No bets yet </div>
+    } else {
     var bItem = this.props.currentBet.map((bet) => {
+      console.log('this one', this.props.currentBet.length);
       return <div className="betsbets">
               <BetItem key = { bet.title }
                       bets = { bet }
@@ -79,6 +89,7 @@ class betList extends React.Component {
     });
 
     return bItem;
+  }
   }
 
   render(){
@@ -104,7 +115,6 @@ class betList extends React.Component {
       else if (this.state.firsttimeSelect === false){
         return (
             <div>
-              <h2 className="beepbeep"> Current Bets </h2>
 
              { this.currentBetsWithoutChat() }
 
@@ -115,7 +125,6 @@ class betList extends React.Component {
       else {
           return(
             <div>
-              <h2> Current Bets </h2>
 
               { this.currentBets() }
 
