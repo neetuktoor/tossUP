@@ -58,14 +58,14 @@ class Comments extends React.Component {
 	render(){
 		if (this.state.fetchedBet === true){
 			return <div className = "comments">
-					<h4> { this.props.betDetails.title } </h4>
+					<h4 className="chatTitle"> { this.props.betDetails.title } </h4>
 
 					<ul> { this.renderComments() } </ul>
 
 					<span>
 						<form onSubmit = { this.handleSubmit }>
-							<input onChange = { this.handleChange } />
-							<input type = "submit" value= "Send"/>
+							<input className= "chatBar" onChange = { this.handleChange } />
+							<input className= "chatBtn" type = "submit" value= "Send"/>
 						</form>
 					</span>
 				</div>
