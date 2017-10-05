@@ -35,17 +35,39 @@ class BetDetail extends React.Component {
     this.setState({ displayComments: true } );
   }
 
+  addWinner(winner){
+    if (winner === this.props.betDetails.invitername){
+      this.props.inviterWon(winner);
+    }
+    else{
+      this.props.invitedWon(winner);
+    }
+
+  }
 
   renderDetails = () => {
-    return <div className = "profiles" >
-          <h2> { this.props.betDetails.title } <button className = "exit" onClick = { () => { this.exitDetails() } } > X </button></h2>
-          <div className = 'participantsdetail'> <img className="profilePic" src = { this.props.betDetails.inviterpic }/> VS <img className="profilePic" src = { this.props.betDetails.invitedpic }/></div>
-          <div className = 'p1detail'> { this.props.betDetails.invitername }  </div> <div className = 'p2detail'> { this.props.betDetails.invitedname }  </div>
-          <div className = "prizeText"> Prize: { this.props.betDetails.prize }</div>
-          <div className = "datedetails"> EndDate: { this.props.betDetails.date }</div>
-          <div className = "winner"> Winner: <button> Add winner </button></div>
-          <div className = "description"> { this.props.betDetails.details } </div>
-          </div>
+    console.log("winner", this.props.betDetails.winner );
+    if (this.props.betDetails.winner === undefined){
+     return <div className = "profiles" >
+            <h2> { this.props.betDetails.title } <button className = "exit" onClick = { () => { this.exitDetails() } } > X </button></h2>
+            <div className = 'participantsdetail'> <img className="profilePic" src = { this.props.betDetails.inviterpic }/> VS <img className="profilePic" src = { this.props.betDetails.invitedpic }/></div>
+            <div className = 'p1detail'> { this.props.betDetails.invitername }  </div> <div className = 'p2detail'> { this.props.betDetails.invitedname }  </div>
+            <div className = "prizeText"> Prize: { this.props.betDetails.prize }</div>
+            <div className = "datedetails"> EndDate: { this.props.betDetails.date }</div>
+            <div className = "winner"> Winner: <button onClick = { () =>{ this.addWinner(this.props.betDetails.invitername) } }  > Add { this.props.betDetails.invitername } as winner to this match! </button><button onClick = { () =>{ this.addWinner(this.props.betDetails.invitedname) } }> Add { this.props.betDetails.invitedname } as winner to this match! </button></div>
+            <div className = "description"> { this.props.betDetails.details } </div>
+            </div>
+    } else{
+      return <div className = "profiles" >
+            <h2> { this.props.betDetails.title } <button className = "exit" onClick = { () => { this.exitDetails() } } > X </button></h2>
+            <div className = 'participantsdetail'> <img className="profilePic" src = { this.props.betDetails.inviterpic }/> VS <img className="profilePic" src = { this.props.betDetails.invitedpic }/></div>
+            <div className = 'p1detail'> { this.props.betDetails.invitername }  </div> <div className = 'p2detail'> { this.props.betDetails.invitedname }  </div>
+            <div className = "prizeText"> Prize: { this.props.betDetails.prize }</div>
+            <div className = "datedetails"> EndDate: { this.props.betDetails.date }</div>
+            <div className = "winner"> Winner: { this.props.betDetails.winner }</div>
+            <div className = "description"> { this.props.betDetails.details } </div>
+            </div>
+    }
   }
 
 

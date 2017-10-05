@@ -96,6 +96,8 @@ class betList extends React.Component {
       if (this.state.selected === true){
         return <BetDetail fetchDetails = { () => { this.props.actions.fetchSelectedBet( this.props.selectedBet ) } }
                           exOut = { () => { this.exitBetDetails() } }
+                          inviterWon = { (inviter) => { this.props.actions.addWinner( {winner: inviter, betid: this.props.selectedBet}  ) } }
+                          invitedWon = { (invited) => { this.props.actions.addWinner( {winner: invited, betid: this.props.selectedBet} ) } }
                />
       }
 

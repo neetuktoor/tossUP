@@ -135,6 +135,7 @@ export function createBet(bets){
 			prize: bets.prize,
 			date: bets.date,
             description: bets.description,
+            winner: '',
 			addUser: bets.addUser,
 			inviter: inviter
 		};
@@ -561,7 +562,8 @@ export function fetchSelectedBet(betid){
 						prize: snapshot.val().prize,
 						invitedpic: 'http://jonvilma.com/images/unknown-19.jpg',
 						invitedname: 'Invite an opponent',
-                        details: snapshot.val().description
+                        details: snapshot.val().description,
+                        winner: snapshot.val().winner
 					}
 				})
 			}
@@ -575,7 +577,8 @@ export function fetchSelectedBet(betid){
 						prize: snapshot.val().prize,
 						invitedpic: snapshot.val().invitedpic,
 						invitedname: snapshot.val().inviteduser,
-                        details: snapshot.val().description
+                        details: snapshot.val().description,
+                        winner: snapshot.val().winner
 					}
 			})
 		});
@@ -636,4 +639,12 @@ export function fetchComments(betid){
             }
         });
     }
+}
+
+
+
+
+//adding winners to the bet
+export function addWinner(winner){
+    Firebase.database().ref('/bets/'+ winner.betid).update({ winner: winner.winner })
 }
