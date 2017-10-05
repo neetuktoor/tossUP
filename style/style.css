@@ -317,6 +317,11 @@ li {
 .chatBtn {
   width: 10%;
   margin-left: 1%;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 28px;
+  font-weight: 100;
 }
 
 .chatBar {
@@ -330,5 +335,16 @@ li {
   width: 60%;
   padding-top: 2%;
   padding-bottom: 2%;
-  margin-left: 20%
+  margin-left: 20%;
+  box-shadow: 0 6px 3px -3px #777;
+}
+
+.chatTitle {
+  background-color: gray;
+  color: white;
+  text-align: center;
+  padding-top: 2%;
+  padding-bottom: 1%;
+  margin-top: -24px;
+  font-weight: 100;
 }
