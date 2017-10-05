@@ -169,7 +169,7 @@ color: black;
 }
 
 .participants {
-  background-color: teal;
+  background-color: blue;
   text-align: center;
   font-size: 18px;
 }
@@ -242,8 +242,8 @@ color: black;
 .acceptBTN {
   width: 10%;
   height: 5%;
-  background-color: teal;
-  border: 1px solid teal;
+  background-color: blue;
+  border: 1px solid blue;
   color: white;
   border-radius: 10%;
   padding-left: 2px;
@@ -259,7 +259,7 @@ color: black;
 
 .acceptBTN:hover {
   opacity: .6;
-  background-color: teal;
+  background-color: blue;
 }
 
 .declineBTN {
