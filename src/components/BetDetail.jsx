@@ -80,7 +80,7 @@ class BetDetail extends React.Component {
 
       return <div>
              { this.renderDetails() }
-             <button><img className = "minimize" src = '../style/images/minimize.png' onClick = { () => { this.exitComments() } } /></button>
+             <button className="expand" onClick = { () => { this.exitComments() } } > - </button>
              <Comments />
             </div>
     }
@@ -88,7 +88,7 @@ class BetDetail extends React.Component {
 
       return <div>
                 { this.renderDetails() }
-                <button> <img className = "openchat" src = '../style/images/arrow-141-512.jpg' onClick = { () => { this.openComments() } } /></button>
+                <button className="expand" onClick = { () => { this.openComments() } } > ^ </button>
           </div>
     }
 

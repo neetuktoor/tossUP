@@ -99,7 +99,7 @@ class betList extends React.Component {
 
       if (this.state.displayComments === true){
         return <div>
-               <button className = "exit"> <img src = "https://cdn2.iconfinder.com/data/icons/interface-part-1/32/circle-ex-512.png" onClick = { () => { this.exitComments() } } />  </button>
+               <button className = "exit" onClick = { () => { this.exitComments() } } > X </button>
                 <Comments />
               </div>
       }
