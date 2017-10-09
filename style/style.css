@@ -49,6 +49,19 @@ cursor: pointer;
     background-color: black;
 }
 
+.navbar-default .navbar-nav>li>a {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 14px;
+}
+
 h5 {
   color: white;
   font-family: 'Roboto', sans-serif;
@@ -169,6 +182,7 @@ padding-top: 5px;
 body {
   background-image: url("https://images.pond5.com/numbers-background-footage-008985563_iconl.jpeg");
   color: black;
+  opacity: .9;
 }
 
 .profilePic {
@@ -407,7 +421,7 @@ body {
 
 .notif-list{
   background-color: white;
-  width: 60%;
+  width: 80%;
   box-shadow: 0 6px 3px -3px #777;
   margin-left: 20%;
   padding-left: 5%;
@@ -418,6 +432,8 @@ body {
   transition: 0.5s;
   cursor: pointer;
   margin-bottom: 2%;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
 .thecomment {
