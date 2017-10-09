@@ -169,6 +169,7 @@ padding-top: 5px;
 body {
   background-image: url("https://images.pond5.com/numbers-background-footage-008985563_iconl.jpeg");
   color: black;
+  opacity: .9;
 }
 
 .profilePic {
