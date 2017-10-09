@@ -78,7 +78,7 @@ class createBetForm extends React.Component {
 
       return (
         <div className= "container">
-          <div className = "col-md-6 col-md-offset-3">
+          <div className = "createBet">
             <h2 className = "beepbeep"> Create a New Bet </h2>
 
             <form onSubmit = { this.props.handleSubmit(this.handleFormSubmit) } >
