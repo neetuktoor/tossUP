@@ -88,7 +88,9 @@ class NotifList extends React.Component {
 
 		if (this.state.invitedfetched === false || this.state.acceptedfetched === false || this.state.declinedfetched === false){
 
-			return <img src = '../style/images/loading.jpg'/>
+			return <div >
+				<img className = "loading" src = "https://orig00.deviantart.net/b83e/f/2010/122/a/8/loading____please_wait_by_cyanide_cloud.png"/>
+			</div>
 		}
 
 		return (

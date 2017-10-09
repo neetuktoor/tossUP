@@ -97,10 +97,7 @@ class Login extends React.Component {
     						className= "btn btn-primary"
     					> Sign In </button>
 
-              <button
-                className= "btn btn-primary"
-                href="/signup"
-              > Sign Up </button>
+              
 
     				</form>
     			</div>
