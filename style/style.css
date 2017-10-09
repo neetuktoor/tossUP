@@ -90,7 +90,7 @@ h3 {
 
 .footer{
   background-color: white;
-  position: relative;
+  position: absolute;
   margin-top: 250px;
   width: 100%;
   margin-top: 3px black;
