@@ -13,9 +13,6 @@ class Header extends React.Component {
 		//the link is because we're not routing anywehre we jsut need it to call our signOutUser action creator from handleSignout
 		if (this.props.authenticated){
 			return [
-			<li className = "nav-item" key = {1}>
-				<Link className = "nav-link" to= "/bets"> <h5> Current Bets </h5> </Link>
-			</li>,
 			<li className = "nav-item" key= {2}>
 				<a className = "nav-link" href= "#" onClick= {() => this.handleSignout()}> <h5> Sign Out </h5> </a>
 			</li>

@@ -182,8 +182,9 @@ padding-top: 5px;
 body {
   background-image: url("https://images.pond5.com/numbers-background-footage-008985563_iconl.jpeg");
   color: black;
-  opacity: .9;
+  opacity: .98;
 }
+
 
 .profilePic {
   border-radius: 50%;
@@ -335,7 +336,7 @@ body {
 
 .betsbets {
   background-color: white;
-  box-shadow: 0 6px 3px -3px #777;
+  /*box-shadow: 0 6px 3px -3px #777;*/
   width: 60%;
   margin-left: 20%;
 }
@@ -473,7 +474,8 @@ li {
   padding-top: 2%;
   padding-bottom: 2%;
   margin-left: 20%;
-  box-shadow: 0 6px 3px -3px #777;
+  max-height: 300px;
+  overflow-y: scroll;
 }
 
 .chatTitle {
@@ -492,10 +494,10 @@ li {
   background-color: white;
   margin-bottom: 3%;
   color: black;
-  margin-left: 1%;
+  margin-left: 20%;
   /*border: none;*/
   font-weight: 100;
-  font-size: 40px;
+  font-size: 20px;
   margin-top: 2%;
   padding: 0;
   border: 1px solid gray;
