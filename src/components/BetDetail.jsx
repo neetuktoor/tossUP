@@ -55,8 +55,8 @@ class BetDetail extends React.Component {
             <div className = "row six">
               <div className = "detailText hello1 col-md-4"> <img src = "../style/images/trophy2.png"/><strong>Prize: </strong> { this.props.betDetails.prize } </div>
               <div className = "detailText hello2 col-md-4"> <img src = "../style/images/edit-icon.png"/><strong> Terms: </strong>{ this.props.betDetails.details }</div></div>
-            <div className = "detailText"> <strong>Winner: </strong> <button onClick = { () =>{ this.addWinner(this.props.betDetails.invitername) } }  > Add { this.props.betDetails.invitername } as winner to this match! </button><button onClick = { () =>{ this.addWinner(this.props.betDetails.invitedname) } }> Add { this.props.betDetails.invitedname } as winner to this match! </button></div>
-           
+            <div className = "detailText"> <strong>Winner: </strong> <button className="addW" onClick = { () =>{ this.addWinner(this.props.betDetails.invitername) } }  > Add { this.props.betDetails.invitername } as winner! </button><button className="addW" onClick = { () =>{ this.addWinner(this.props.betDetails.invitedname) } }> Add { this.props.betDetails.invitedname } as winner! </button></div>
+
             <div className = "endDateText"> <strong>End Date: </strong> { this.props.betDetails.date }</div>
 
            </div>
@@ -82,7 +82,7 @@ class BetDetail extends React.Component {
 
     if (this.state.displayComments === true){
 
-      return <div>
+      return <div className="detailsContainer">
              { this.renderDetails() }
              <button className="expand" onClick = { () => { this.exitComments() } } > - </button>
              <Comments />
@@ -90,7 +90,7 @@ class BetDetail extends React.Component {
     }
 
 
-      return <div>
+      return <div className="detailsContainer">
                 { this.renderDetails() }
                 <button className="expand" onClick = { () => { this.openComments() } } > ^ </button>
           </div>
