@@ -37,7 +37,6 @@
 opacity: .9;
 background-color: black;
 cursor: pointer;
-
 }
 
 .navbar {
@@ -72,7 +71,6 @@ h3 {
     font-size: 40px;
     color: black;
     margin-bottom: 40px;
-
 }
 
 .title {
@@ -88,13 +86,15 @@ h3 {
   text-decoration: none;
 }
 
-.footer{
-  background-color: white;
+.footer {
   position: relative;
-  margin-top: 250px;
+  left: 0;
+  bottom: 0;
+  height: 10%;
   width: 75%;
-  margin-top: 3px black;
   margin-left: 12%;
+  background-color: white;
+  margin-top: 35%;
 }
 
 .icon1 {
@@ -142,11 +142,11 @@ padding-top: 5px;
   padding-top: 2%;
   padding-bottom: 2%;
   margin-top: 5%;
+  margin-bottom: -20%;
   box-shadow: 0 6px 3px -3px #777;
   font-family: 'Courier New', monospace;
   border-style: groove;
   border-width: thin;
-}
 }
 
 .loginText{
@@ -183,8 +183,9 @@ padding-top: 5px;
 body {
   background-image: url("https://images.pond5.com/numbers-background-footage-008985563_iconl.jpeg");
   color: black;
-  opacity: .9;
+  opacity: .98;
 }
+
 
 .profilePic {
   border-radius: 50%;
@@ -206,7 +207,6 @@ body {
 
 .hProfilePic2 {
   border-radius: 50%;
-
   width: 30%;
   border: 1px solid lightgray;
   margin-top: 2%;
@@ -338,7 +338,7 @@ body {
 
 .betsbets {
   background-color: white;
-  box-shadow: 0 6px 3px -3px #777;
+  /*box-shadow: 0 6px 3px -3px #777;*/
   width: 60%;
   margin-left: 20%;
 }
@@ -369,7 +369,6 @@ body {
   margin-top: 2%;
   margin-bottom: 2%;
 }
-  }
 
   .clearBTN:hover{
   opacity: .6;
@@ -424,7 +423,7 @@ body {
   background-color: white;
   width: 80%;
   box-shadow: 0 6px 3px -3px #777;
-  margin-left: 20%;
+  margin-left: 10%;
   padding-left: 5%;
   padding-top: 5%;
   padding-bottom: 5%;
@@ -476,7 +475,8 @@ li {
   padding-top: 2%;
   padding-bottom: 2%;
   margin-left: 20%;
-  box-shadow: 0 6px 3px -3px #777;
+  max-height: 300px;
+  overflow-y: scroll;
 }
 
 .chatTitle {
@@ -495,10 +495,10 @@ li {
   background-color: white;
   margin-bottom: 3%;
   color: black;
-  margin-left: 1%;
+  margin-left: 20%;
   /*border: none;*/
   font-weight: 100;
-  font-size: 40px;
+  font-size: 20px;
   margin-top: 2%;
   padding: 0;
   border: 1px solid gray;
@@ -506,12 +506,14 @@ li {
 
 .createBet {
   width: 60%;
+  height: 60;
   padding-left: 20%;
   padding-right: 10%;
   background-color: white;
   padding-top: 2%;
   padding-bottom: 2%;
   margin-left: 20%;
+  margin-bottom: -20%;
 }
 
  .profilepic{
@@ -535,12 +537,12 @@ li {
   width: 300px;
   margin-left: 50px
   margin-top: 3px;
-  
+
 }
 .hello2{
   padding: 3%;
   width: 300px;
-  
+
 }
 
 .six{
