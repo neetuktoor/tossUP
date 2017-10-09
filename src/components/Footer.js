@@ -24,6 +24,7 @@ class Footer extends React.Component {
 				<div>
   					<Link className="footerbrand2" to = "/login"><img className="icon1" src = "../style/images/homepage.png"/></Link>
             <Link className="footerbrand2" to = "/profile"><img className="icon1" src = "../style/images/profile.png"/></Link>
+            <Link className="footerbrand23" to = "/login"><img className="icon1" src = "../style/images/cointoss.png"/></Link>
             <Link className="footerbrand2" to = "/notifications"><img className="icon2" src = "../style/images/notification.png"/></Link>
             <Link className="footerbrand2" to = "/createbet"><img className="icon2" src = "../style/images/add.png"/></Link>
 				</div>
