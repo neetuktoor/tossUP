@@ -157,13 +157,13 @@ padding-top: 5px;
 }
 
 .beepbeep {
-  /*margin-left: 25%;*/
+
   font-weight: 105;
   font-size: 2em;
   color: blue;
   font-family: 'Viga', monospace;
   font-family: 'Roboto', monospace;
-  margin-left: 75px;
+
 }
 
 body {
