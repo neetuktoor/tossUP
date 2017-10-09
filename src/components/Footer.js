@@ -3,20 +3,23 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
-
 class Footer extends React.Component {
+	
 
 	renderAuthLinks(){
 		//if not authenticated, take them to login page
 		if (!this.props.authenticated){
 			return(
 				<div>
-  					{/* <Link className="footerbrand2" to = "/login"><img className="icon" src = "../style/images/homepage.png"/></Link>
-  					<Link className="footerbrand2" to = "/login"><img className="icon" src = "../style/images/notification.png"/></Link>
-  					<Link className="footerbrand2" to = "/login"><img className="icon" src = "../style/images/profile.png"/></Link> */}
+
+  					// <Link className="navbar-brand" to = "/login"><img src = "../style/images/homepage.jpg"/></Link>
+  					// <Link className="navbar-brand" to = "/login"><img src = "../style/images/notification.png"/></Link>
+  					// <Link className="navbar-brand" to = "/login"><img src = "../style/images/profile.jpg"/></Link>
+
 				</div>
 				);
 		}
+
 
 		//if authenticated, render components if clicked on
 		else {
@@ -27,6 +30,7 @@ class Footer extends React.Component {
             <Link className="footerbrand23" to = "/login"><img className="icon1" src = "../style/images/cointoss.png"/></Link>
             <Link className="footerbrand2" to = "/notifications"><img className="icon2" src = "../style/images/notification.png"/></Link>
             <Link className="footerbrand2" to = "/createbet"><img className="icon2" src = "../style/images/add.png"/></Link>
+
 				</div>
 				);
 		}
@@ -34,7 +38,9 @@ class Footer extends React.Component {
 
 	render(){
 		return (
-			<nav className="footer ">
+
+			<nav className="footer">
+
 				{ this.renderAuthLinks() }
 			</nav>
 			);
@@ -48,4 +54,6 @@ class Footer extends React.Component {
 		}
 	}
 
+
 	export default connect (mapStateToProps, null) (Footer);
+

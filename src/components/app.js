@@ -8,6 +8,7 @@ import Signup from './Signup';
 import Login from './Login';
 import Home from './Home';
 import Profile from './Profile';
+
 import EditProfile from './EditProfile';
 import createBetForm from './createBetForm';
 import NotifList from './NotifList';
@@ -21,6 +22,7 @@ const PrivateRoute = ({component: Component, authenticated, ...props}) => {
         <Route
             {...props}
             render= {(props) => authenticated === true
+
                 ? <Component {...props} />
                 : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
         />
@@ -46,6 +48,7 @@ class App extends React.Component {
                 <div className="container">
                    <Header />
                     <Switch>
+
                         <PrivateRoute authenticated={this.props.authenticated }  path="/createbet" component= { createBetForm } />
                         <PublicRoute authenticated={this.props.authenticated }  path="/signup" component={ Signup } />
                         <PublicRoute authenticated={this.props.authenticated }  path="/login" component={ Login } />
@@ -59,6 +62,7 @@ class App extends React.Component {
                     <Footer />
                 </div>
             </BrowserRouter>
+
 
         );
     }

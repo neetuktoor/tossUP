@@ -22,10 +22,10 @@ export default function user(state = initialState, action){
 				var profileURL =  action.payload.profile_picture;
 
 			}
+
 			else {
 				profileURL = '../style/images/Nopic.png';
 			}
-
 			if( action.payload.email){
 				var email = action.payload.email;
 			}
@@ -34,6 +34,7 @@ export default function user(state = initialState, action){
 			}
 
 			// console.log("Displayname and profilepic", displayName, profileURL);
+
 			return {
 				displayName: displayName,
 				email: email,
@@ -44,6 +45,7 @@ export default function user(state = initialState, action){
 			return {
 				...state,
 				error: action.payload.error
+
 			}
 
 		default:
@@ -52,3 +54,4 @@ export default function user(state = initialState, action){
 
 	}
 }
+

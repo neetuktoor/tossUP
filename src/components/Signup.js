@@ -38,6 +38,7 @@ class Signup extends React.Component {
   //by using ...input we are deconstructuring the value of input prop and merging in
   //values provided by Field component
 
+
   //condition: if touched and if there is error, display error and add has-error on fieldset
   //also added control-label and help-block to actual error text
   renderField = ({ input, label, type, meta: {touched, error } }) => (
@@ -47,6 +48,7 @@ class Signup extends React.Component {
   			<input
   				{...input}
   				// placeholder = { label }
+
   				className = "form-control"
   				type= { type }
   			/>
@@ -70,6 +72,7 @@ class Signup extends React.Component {
     		<div className = "loginContainer">
     			<h2 className = "beep"> SIGN UP </h2>
 
+
     			{ this.renderAuthenticationError()}
 
     			<form onSubmit = {this.props.handleSubmit(this.handleFormSubmit)}>
@@ -77,6 +80,7 @@ class Signup extends React.Component {
     			<Field
             className="loginText"
     				name = "email"
+
     				type = "text"
     				component = {this.renderField}
     				label = "Email"
@@ -84,6 +88,7 @@ class Signup extends React.Component {
 
     			<Field
     				name = "password"
+
     				type = "password"
     				component = {this.renderField}
     				label = "Password"
@@ -91,6 +96,7 @@ class Signup extends React.Component {
 
     			<Field
     				name = "passwordConfirmation"
+
     				type = "password"
     				component = {this.renderField}
     				label = "Password Confirmation"
@@ -118,3 +124,4 @@ export default connect(mapStateToProps, Actions)(reduxForm({
 	form: 'signup',
 	validate
 })(Signup));
+

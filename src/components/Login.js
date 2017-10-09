@@ -1,5 +1,4 @@
 import React from 'react';
-// import '../style/style.css'
 
 //The Field component makes it easy to connect individual inputs to the Redux store
 import { Field, reduxForm } from 'redux-form';
@@ -60,9 +59,11 @@ class Login extends React.Component {
 	render() {
     	return (
     		<div className= "container">
+
     			<div className = "loginContainer">
             {/* <img className="logoImg" src="../style/images/logo.png"/> */}
     				<h2 className = "beep"> LOG IN </h2>
+
 
     				{ this.renderAuthenticationError() }
 
@@ -70,6 +71,7 @@ class Login extends React.Component {
 
     					<fieldset className = "form-group">
     						<label className="loginText"> Email </label>
+
 
     						<Field
     							name = "email"
@@ -82,6 +84,7 @@ class Login extends React.Component {
 
     					<fieldset className = "form-group">
     						<label className="loginText"> Password </label>
+
 
     						<Field
     							name = "password"
@@ -97,10 +100,10 @@ class Login extends React.Component {
     						className= "btn btn-primary"
     					> Sign In </button>
 
-              
 
     				</form>
     			</div>
+
 
     		</div>
     	);

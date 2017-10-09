@@ -13,8 +13,10 @@ class Header extends React.Component {
 		//the link is because we're not routing anywehre we jsut need it to call our signOutUser action creator from handleSignout
 		if (this.props.authenticated){
 			return [
+
 			<li className = "nav-item" key= {1}>
 				<a className = "nav-link" href= "#" onClick= {() => this.handleSignout()}> <h5> Sign Out </h5> </a>
+
 			</li>
 			]
 		}
@@ -27,6 +29,7 @@ class Header extends React.Component {
 
 				<li className = "nav-item" key= {2}>
 					<Link className = "headerLink" to = "/signup"> Sign Up </Link>
+
 				</li>
 			]
 		}
@@ -37,7 +40,9 @@ class Header extends React.Component {
 			<nav className = "navbar navbar-default">
 				<div className = "container-fluid">
 					<div className = "navbar-header">
+
 						<Link className = "title" to = "/"> tossUp </Link>
+
 					</div>
 
 					<ul className = "nav navbar-nav navbar-right">
@@ -56,4 +61,6 @@ function mapStateToProps(state){
 	}
 }
 
+
 export default connect(mapStateToProps, Actions)(Header);
+

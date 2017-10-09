@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
@@ -6,6 +7,7 @@ import { BrowserRouter, Redirect } from 'react-router-dom';
 
 
  const validate = values => {
+
 		const errors = {};
 
 		if (!values.title){
@@ -29,6 +31,7 @@ import { BrowserRouter, Redirect } from 'react-router-dom';
     if (!values.addUser){
       errors.addUser = "Please add another user to the bet.";
     }
+
 
 		return errors;
 	};
@@ -57,6 +60,7 @@ class createBetForm extends React.Component {
     	<fieldset className={`form-group ${touched && error ? 'has-error' : ''}`}>
       		<label className="loginText">{label}</label>
 
+
       		<div>
         	<input {...input}
         		placeholder={label}
@@ -81,10 +85,12 @@ class createBetForm extends React.Component {
           <div className = "createBet">
             <h2 className = "beepbeep"> Create a New Bet </h2>
 
+
             <form onSubmit = { this.props.handleSubmit(this.handleFormSubmit) } >
 
               <fieldset className = "form-group">
                 <label className="loginText"> Title </label>
+
 
                 <Field
                   name = "title"
@@ -110,6 +116,7 @@ class createBetForm extends React.Component {
               <fieldset className = "form-group">
                 <label className="loginText"> Prize </label>
 
+
                 <Field
                   name = "prize"
                   component = {this.renderField}
@@ -122,6 +129,7 @@ class createBetForm extends React.Component {
               <fieldset className = "form-group">
                 <label className="loginText"> End Date </label>
 
+
                 <Field
                   name = "date"
                   component = {this.renderField}
@@ -133,6 +141,7 @@ class createBetForm extends React.Component {
 
               <fieldset className = "form-group">
                 <label className="loginText"> Add User by Email </label>
+
 
               <Field
                   name = "addUser"
@@ -163,7 +172,6 @@ function mapStateToProps(state){
 		Error: state.user.error
 	};
 }
-
 
 export default connect(null, Actions)(reduxForm({
 	form: 'createBet',

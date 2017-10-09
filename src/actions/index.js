@@ -15,6 +15,7 @@ export const SELECT_BET = 'SELECT_BET';
 export const FETCH_SELECTED_DETAILS = 'FETCH_SELECTED_DETAILS';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 
+
 //holds the shit to hold access key for firebase
 var config = {
     apiKey: "AIzaSyDBlxK-zxp7wRMEneeUYCsDlHrdYngU-Ro",
@@ -49,12 +50,14 @@ export function makedefaultProfile(){
             email: Firebase.auth().currentUser.email
         });
 }
+
 //for firebase use
 export function signInUser(credentials) {
     return function(dispatch) {
         Firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password)
             .then(response => {
                 console.log("finished logging in in firebase");
+
                 dispatch(authUser());
             })
             .catch(error => {
@@ -610,6 +613,7 @@ export function fetchSelectedBet(betid){
                         details: snapshot.val().description,
                         winner: snapshot.val().winner
 					}
+
 			})
 		});
 	}
@@ -677,4 +681,5 @@ export function fetchComments(betid){
 //adding winners to the bet
 export function addWinner(winner){
     Firebase.database().ref('/bets/'+ winner.betid).update({ winner: winner.winner })
+
 }

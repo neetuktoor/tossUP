@@ -11,6 +11,7 @@ export default function bets(state = initialState, action){
 		case AUTH_USER:
 			return{
 				...state,
+
 				authenticated: true,
 				error: null
 			};
@@ -18,6 +19,7 @@ export default function bets(state = initialState, action){
 		case SIGN_OUT_USER:
 			return{
 				...state,
+
 				authenticated: false,
 				error: null
 			};
@@ -32,3 +34,4 @@ export default function bets(state = initialState, action){
 			return state;
 	}
 }
+

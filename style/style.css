@@ -532,7 +532,7 @@ li {
   padding-top: 2%;
   padding-bottom: 2%;
   margin-left: 20%;
-  max-height: 500px;
+  max-height: 450px;
   overflow-y: scroll;
 }
 
@@ -584,4 +584,9 @@ li {
   height: 500px;
   overflow-y: scroll;
   width: 80%;
+}
+
+.betscontain{
+  height: 450px;
+  overflow-y: scroll;
 }

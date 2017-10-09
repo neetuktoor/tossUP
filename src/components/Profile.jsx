@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 class Profile extends React.Component {
 
 	//get user information to display on the page
+
 	componentWillMount() {
 		this.props.fetchUserInfo();
 	}
@@ -26,6 +27,7 @@ class Profile extends React.Component {
 					<div > Username: { this.props.Name } </div>
 					<div > Email: { this.props.Email } </div>
 					<Link to = "/editprofile"><button className = "editBTN"> Edit Profile</button></Link>
+
 				</div>
 			</div>
 		);
@@ -43,6 +45,5 @@ function mapStateToProps(state){
 
 
 
-
-
 export default connect(mapStateToProps, Actions)(Profile);
+
