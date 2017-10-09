@@ -92,8 +92,9 @@ h3 {
   background-color: white;
   position: relative;
   margin-top: 250px;
-  width: 100%;
+  width: 75%;
   margin-top: 3px black;
+  margin-left: 12%;
 }
 
 .icon1 {
@@ -544,4 +545,9 @@ li {
 
 .six{
   margin-left: 50px;
+}
+
+.navbar{
+  width:75%;
+  margin-left: 12%;
 }
