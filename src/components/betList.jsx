@@ -55,7 +55,7 @@ class betList extends React.Component {
     }
     else{
     var bItem = this.props.currentBet.map((bet) => {
-      return <div>
+      return <div className="betsbets">
               <BetItem key = { bet.title }
                       bets = { bet }
                       SelectBet = { () => { this.props.actions.onSelectBet({ bet }) } }
@@ -94,11 +94,13 @@ class betList extends React.Component {
 
   render(){
       if (this.state.fetched === false){
-        return <img src = '../style/images/loading.jpg'/>
+        return <div >
+                  <img className = "loading" src = "https://orig00.deviantart.net/b83e/f/2010/122/a/8/loading____please_wait_by_cyanide_cloud.png"/>
+               </div>
       }
 
       if (this.state.displayComments === true){
-        return <div>
+        return <div >
                <button className = "exit" onClick = { () => { this.exitComments() } } > X </button>
                 <Comments />
               </div>
@@ -114,7 +116,7 @@ class betList extends React.Component {
 
       else if (this.state.firsttimeSelect === false){
         return (
-            <div>
+            <div className = "betscontain" >
 
              { this.currentBetsWithoutChat() }
 
@@ -124,7 +126,7 @@ class betList extends React.Component {
 
       else {
           return(
-            <div>
+            <div className = "betscontain">
 
               { this.currentBets() }
 

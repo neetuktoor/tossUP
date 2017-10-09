@@ -23,7 +23,7 @@ class Profile extends React.Component {
 					<h2 className = "beepbeep"> Profile Page </h2>
 					{ this.renderUserError() }
 					<img className = "profilepic" src = { this.props.Pic } />
-					<div > { this.props.Name } </div>
+					<div > Username: { this.props.Name } </div>
 					<div > Email: { this.props.Email } </div>
 					<Link to = "/editprofile"><button className = "editBTN"> Edit Profile</button></Link>
 				</div>

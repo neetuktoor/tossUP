@@ -130,6 +130,10 @@ padding-top: 5px;
   padding-bottom: 2%;
   margin-top: 5%;
   box-shadow: 0 6px 3px -3px #777;
+  font-family: 'Courier New', monospace;
+  border-style: groove;
+  border-width: thin;
+}
 }
 
 .loginText{
@@ -158,8 +162,9 @@ padding-top: 5px;
   font-weight: 105;
   font-size: 2em;
   color: blue;
-  font-family: 'Viga', sans-serif;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Viga', monospace;
+  font-family: 'Roboto', monospace;
+  margin-left: 75px;
 }
 
 body {
@@ -292,7 +297,6 @@ color: black;
 .betsbets {
   background-color: blue;
   box-shadow: 0 6px 3px -3px #777;
-
 }
 
 .clearBTN {
@@ -454,3 +458,15 @@ li {
   padding-bottom: 2%;
   margin-left: 20%;
 }
+ 
+ .profilepic{
+  width: 300px;
+  border-radius: 50%;
+  border-style: double;
+  border-width: thick;
+ }
+
+ .loading{
+    width: 100%;
+ }
+
