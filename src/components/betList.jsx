@@ -75,7 +75,7 @@ class betList extends React.Component {
     } else {
     var bItem = this.props.currentBet.map((bet) => {
       console.log('this one', this.props.currentBet.length);
-      return <div className="betsbets">
+      return <div className="currentbets">
               <BetItem key = { bet.title }
                       bets = { bet }
                       SelectBet = { () => { this.props.actions.onSelectBet({ bet }) } }
