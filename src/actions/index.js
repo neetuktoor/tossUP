@@ -168,8 +168,8 @@ export function createBet(bets){
 		Firebase.database().ref('/bets/' + key).update({
     	inviterpic: profile,
         invitername : username,
-        inviteduser: '',
-        invitedpic: ''
+        inviteduser: 'Add a user',
+        invitedpic: 'http://vignette3.wikia.nocookie.net/glee-new-beginnings/images/f/fd/Unknown.gif/revision/latest?cb=20130205144914'
     });
 	});
 
