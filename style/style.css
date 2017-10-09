@@ -87,7 +87,7 @@ h3 {
 }
 
 .footer {
-  position: relative;
+  position: absolute;
   left: 0;
   bottom: 0;
   height: 10%;
@@ -147,6 +147,8 @@ padding-top: 5px;
   font-family: 'Courier New', monospace;
   border-style: groove;
   border-width: thin;
+  max-height: 400px;
+  overflow-y: scroll;
 }
 
 .loginText{
@@ -513,7 +515,8 @@ li {
   padding-top: 2%;
   padding-bottom: 2%;
   margin-left: 20%;
-  margin-bottom: -20%;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
  .profilepic{
@@ -524,7 +527,9 @@ li {
  }
 
  .loading{
-    width: 100%;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 2%;
     padding: 10%;
  }
 
