@@ -37,7 +37,6 @@
 opacity: .9;
 background-color: black;
 cursor: pointer;
-
 }
 
 .navbar {
@@ -72,7 +71,6 @@ h3 {
     font-size: 40px;
     color: black;
     margin-bottom: 40px;
-
 }
 
 .title {
@@ -88,12 +86,14 @@ h3 {
   text-decoration: none;
 }
 
-.footer{
-  background-color: white;
+.footer {
   position: absolute;
-  margin-top: 250px;
-  width: 100%;
-  margin-top: 3px black;
+  left: 0;
+  bottom: 0;
+  height: 10%;
+  width: 60%;
+  margin-left: 20%;
+  background-color: white;
 }
 
 .icon1 {
@@ -145,7 +145,6 @@ padding-top: 5px;
   font-family: 'Courier New', monospace;
   border-style: groove;
   border-width: thin;
-}
 }
 
 .loginText{
@@ -213,6 +212,7 @@ body {
 
 .hProfilePic {
   border-radius: 50%;
+
   width: 30%;
   border: 1px solid lightgray;
   margin-left: 15%;
@@ -367,7 +367,6 @@ body {
   margin-top: 2%;
   margin-bottom: 2%;
 }
-  }
 
   .clearBTN:hover{
   opacity: .6;
@@ -422,7 +421,7 @@ body {
   background-color: white;
   width: 80%;
   box-shadow: 0 6px 3px -3px #777;
-  margin-left: 20%;
+  margin-left: 10%;
   padding-left: 5%;
   padding-top: 5%;
   padding-bottom: 5%;
@@ -522,4 +521,31 @@ li {
 
  .loading{
     width: 100%;
+    padding: 10%;
  }
+
+.against{
+  height: 100px;
+  border-style: groove;
+}
+.hello1{
+  padding: 3%;
+  width: 300px;
+  margin-left: 50px
+  margin-top: 3px;
+
+}
+.hello2{
+  padding: 3%;
+  width: 300px;
+
+}
+
+.six{
+  margin-left: 50px;
+}
+
+.navbar{
+  width:75%;
+  margin-left: 12%;
+}

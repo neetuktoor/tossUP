@@ -33,7 +33,7 @@ class Footer extends React.Component {
 
 	render(){
 		return (
-			<nav className="footer">
+			<nav className="footer ">
 				{ this.renderAuthLinks() }
 			</nav>
 			);
