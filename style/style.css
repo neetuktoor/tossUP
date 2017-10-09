@@ -173,7 +173,7 @@ body {
 
 .profilePic {
   border-radius: 50%;
-  width: 25%;
+  width: 40%;
   height: 20%;
   border: 1px solid lightgray;
   margin-left: -7%;
@@ -183,7 +183,7 @@ body {
 
 .profilePic2 {
   border-radius: 50%;
-  width: 25%;
+  width: 40%;
   height: 20%;
   border: 1px solid lightgray;
   margin-left: 1%;
@@ -219,8 +219,9 @@ body {
   background-color: white;
   height: 100%;
   width: 65%;
-  padding-left: 35%;
   padding-bottom: 2%;
+  margin-left: 20%;
+  }
 
 }
 
@@ -250,7 +251,7 @@ body {
   font-size: 18px;
   /*margin-left: 10%;*/
   /*margin-top: 5%;*/
-  align-content: center;
+  text-align: center;
   width: 100%;
   color: blue;
   margin-bottom: 0;
@@ -297,8 +298,8 @@ body {
 .betsbets {
   background-color: white;
   box-shadow: 0 6px 3px -3px #777;
-<<<<<<< HEAD
   width: 60%;
+  margin-left: 20%;
 }
 
 .currentbets {
@@ -308,8 +309,6 @@ body {
   border-radius: 1%;
   margin-top: 1%;
   margin-bottom: 1%;
-=======
->>>>>>> 575b6663dd0034447045ada2ac18c7ae785c14bd
 }
 
 .clearBTN {
@@ -471,7 +470,7 @@ li {
   padding-bottom: 2%;
   margin-left: 20%;
 }
- 
+
  .profilepic{
   width: 300px;
   border-radius: 50%;
@@ -483,4 +482,3 @@ li {
     width: 100%;
     padding: 10%;
  }
-
