@@ -45,35 +45,31 @@ class BetDetail extends React.Component {
   }
 
   renderDetails = () => {
-    console.log("winner this ", this.props.betDetails );
+
+    console.log("winner", this.props.betDetails.winner );
     if (this.props.betDetails.winner === ""){
-     return <div className = "container profiles" >
-              <div className = "row">
-                <h2 className= "col-md-12"> { this.props.betDetails.title } <button className = "exitDeets" onClick = { () => { this.exitDetails() } } > X </button></h2>
-              </div>
-              <div className = "row against">
-                <div className="col-md-5"><img  className = "hProfilePic" src = { this.props.betDetails.inviterpic }/><div className = "row">{ this.props.betDetails.invitername }</div></div>
-                <div className = "col-md-2">VS</div> <div className = "col-md-5"><img className = "hProfilePic2" src = { this.props.betDetails.invitedpic }/><div className = "row">{ this.props.betDetails.invitedname }</div></div>
-              </div>
-            
-            <div className = "row">  
-              <div className = " col-md-6"> Prize: { this.props.betDetails.prize }</div>
-              <div className = " col-md-6"> Terms: { this.props.betDetails.details } </div>
-            </div>
-            <div className = ""> EndDate: { this.props.betDetails.date }</div>
-            <div className = "row">
-              <div className = " col-md-12"> Winner: <button onClick = { () =>{ this.addWinner(this.props.betDetails.invitername) } }  > Add { this.props.betDetails.invitername } as winner to this match! </button><button onClick = { () =>{ this.addWinner(this.props.betDetails.invitedname) } }> Add { this.props.betDetails.invitedname } as winner to this match! </button></div>
-            </div>
-            </div>
+     return <div className = "profiles container" >
+            <h2 className="betTitle2"> { this.props.betDetails.title } <button className = "exitDeets" onClick = { () => { this.exitDetails() } } > X </button></h2>
+            <img className="hProfilePic" src = { this.props.betDetails.inviterpic }/> VS <img className="hProfilePic2" src = { this.props.betDetails.invitedpic }/>
+            <div className = "pps"> <strong>Participant 1: </strong> { this.props.betDetails.invitername }<strong>          Participant 2: </strong> { this.props.betDetails.invitedname }  </div>
+            <div className = "row six">
+              <div className = "detailText hello1 col-md-4"> <img src = "../style/images/trophy2.png"/><strong>Prize: </strong> { this.props.betDetails.prize } </div>
+              <div className = "detailText hello2 col-md-4"> <img src = "../style/images/edit-icon.png"/><strong> Terms: </strong>{ this.props.betDetails.details }</div></div>
+            <div className = "detailText"> <strong>Winner: </strong> <button onClick = { () =>{ this.addWinner(this.props.betDetails.invitername) } }  > Add { this.props.betDetails.invitername } as winner to this match! </button><button onClick = { () =>{ this.addWinner(this.props.betDetails.invitedname) } }> Add { this.props.betDetails.invitedname } as winner to this match! </button></div>
+           
+            <div className = "endDateText"> <strong>End Date: </strong> { this.props.betDetails.date }</div>
+
+           </div>
     } else{
       return <div className = "profiles" >
             <h2 className="betTitle2"> { this.props.betDetails.title } <button className = "exitDeets" onClick = { () => { this.exitDetails() } } > X </button></h2>
-            <div className = 'prizeText'> <img className="hProfilePic" src = { this.props.betDetails.inviterpic }/> VS <img className="hProfilePic2" src = { this.props.betDetails.invitedpic }/></div>
-            <div className = 'prizeText'> { this.props.betDetails.invitername }  </div> <div className = 'prizeText'> { this.props.betDetails.invitedname }  </div>
-            <div className = "prizeText"> Prize: { this.props.betDetails.prize }</div>
-            <div className = "prizeText"> EndDate: { this.props.betDetails.date }</div>
-            <div className = "prizeText"> Winner: { this.props.betDetails.winner }</div>
-            <div className = "prizeText"> { this.props.betDetails.details } </div>
+            <img className="hProfilePic" src = { this.props.betDetails.inviterpic }/> VS <img className="hProfilePic2" src = { this.props.betDetails.invitedpic }/>
+            <div className = "pps"> <strong>Participant 1: </strong> { this.props.betDetails.invitername } <strong>         Participant 2: </strong> { this.props.betDetails.invitedname }  </div>
+            <div className = "row six">
+              <div className = "detailText hello1 col-md-4"> <img src = "../style/images/trophy2.png"/><strong>Prize: </strong> { this.props.betDetails.prize } </div>
+              <div className = "detailText hello2 col-md-4"> <img src = "../style/images/edit-icon.png"/><strong> Terms: </strong>{ this.props.betDetails.details }</div></div>
+            <div className = "detailText"> <strong>Winner: </strong>{ this.props.betDetails.winner }</div>
+            <div className = "endDateText"> <strong>End Date: </strong> { this.props.betDetails.date }</div>
             </div>
     }
   }
